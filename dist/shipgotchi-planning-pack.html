@@ -1,0 +1,1550 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>ShipGotchi Planning Pack</title>
+  <style>
+    @page {
+      margin: 0.65in;
+    }
+    :root {
+      color: #172033;
+      background: #fffaf2;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.48;
+    }
+    body {
+      margin: 0;
+      background: #fffaf2;
+    }
+    .cover {
+      min-height: 8.3in;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-radius: 28px;
+      padding: 56px;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255, 214, 102, 0.55), transparent 31%),
+        radial-gradient(circle at 88% 12%, rgba(83, 218, 201, 0.45), transparent 33%),
+        linear-gradient(135deg, #fff7d6 0%, #fff 48%, #e7fbff 100%);
+      border: 2px solid rgba(23, 32, 51, 0.08);
+    }
+    .eyebrow {
+      color: #7857ff;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .cover h1 {
+      margin: 18px 0 12px;
+      font-size: 58px;
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
+    .cover p {
+      max-width: 680px;
+      font-size: 20px;
+      color: #465066;
+    }
+    .badge-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .badge {
+      border: 1px solid rgba(23, 32, 51, 0.1);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .doc-section {
+      page-break-before: always;
+      padding: 8px 0;
+    }
+    h1 {
+      font-size: 34px;
+      margin: 0 0 18px;
+      letter-spacing: 0;
+      color: #101827;
+    }
+    h2 {
+      margin-top: 28px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(23, 32, 51, 0.12);
+      font-size: 21px;
+      color: #172033;
+    }
+    h3 {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #253047;
+    }
+    p, li {
+      font-size: 12.2px;
+    }
+    ul, ol {
+      padding-left: 20px;
+    }
+    code {
+      background: #f0f4ff;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 11px;
+    }
+    blockquote {
+      border-left: 4px solid #7857ff;
+      padding-left: 14px;
+      margin-left: 0;
+      color: #465066;
+    }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <div class="eyebrow">Dollar Vibe Club Build Sprint</div>
+    <h1>ShipGotchi Planning Pack</h1>
+    <p>Paste your GitHub. Meet the creature your commits created. A focused 24-hour plan for a premium, no-login builder pet webapp designed to win the demo and feel launchable after the sprint.</p>
+    <div class="badge-row">
+      <div class="badge">Track: Vibe Gotchi</div>
+      <div class="badge">MVP: 5 Killer Features</div>
+      <div class="badge">No Login</div>
+      <div class="badge">Mobile-First</div>
+      <div class="badge">Cute Premium Toy</div>
+    </div>
+  </section>
+  <section class="doc-section"><h1>ShipGotchi Planning Index</h1>
+<p>Date: 2026-05-22
+Challenge: Dollar Vibe Club 24-Hour Open Build Sprint
+Track: Vibe Gotchi
+Builder: Solo, full-stack
+Host: Vercel</p>
+<h2>Build Decisions (locked)</h2>
+<ul>
+<li><strong>Solo execution.</strong> No multi-person parallelism. The five workstreams in the execution plan run sequentially on a single critical path, optionally orchestrated as AI subagents.</li>
+<li><strong>Vercel hosting</strong> with a serverless GitHub proxy. The proxy is <strong>required, not optional</strong> (see Technical Plan) — it is the single biggest defense against a dead live demo from rate limits.</li>
+<li><strong>Layered sprite system</strong> (one base mascot + state-driven layers) is the primary art approach. Independently AI-generated variants are a stretch goal, not a dependency.</li>
+<li><strong>Build folder:</strong> <code>C:\Code\Challenge</code>.</li>
+</ul>
+<h2>Strategic Decision</h2>
+<p>Build <strong>ShipGotchi</strong>: a no-login, mobile-first webapp where a visitor enters any public GitHub username and instantly hatches a premium digital pet whose mood, evolution, outfit, and Builder DNA are based on recent public GitHub activity.</p>
+<p>The goal is to win the judging demo and make the build feel like something DVC would want to co-build after the sprint.</p>
+<h2>Planning Pack</h2>
+<ol>
+<li><a href="./01-product-brief.md">Product Brief</a></li>
+<li><a href="./02-mvp-specification.md">MVP Specification</a></li>
+<li><a href="./03-experience-visual-direction.md">Experience And Visual Direction</a></li>
+<li><a href="./04-technical-plan.md">Technical Plan</a></li>
+<li><a href="./05-execution-plan-agent-workstreams.md">Execution Plan And Agent Workstreams</a></li>
+<li><a href="./06-judging-demo-submission-kit.md">Judging Demo And Submission Kit</a></li>
+<li><a href="./07-prompt-runbook.md">Prompt Runbook</a></li>
+<li><a href="./08-sprite-asset-prompts.md">Sprite Asset Prompts</a></li>
+</ol>
+<h2>Winning Angle</h2>
+<p>Most entries will either be over-scoped or too generic. ShipGotchi should win by being:</p>
+<ul>
+<li>Instant: no login, no setup, no tutorial.</li>
+<li>Emotional: the pet is the product, not a dashboard decoration.</li>
+<li>Streamable: judges can paste a username and get a fun reveal in seconds.</li>
+<li>Robust: GitHub public APIs, sample users, and graceful fallbacks keep the demo alive.</li>
+<li>Launchable: the long-term vision is a persistent builder companion that grows as you ship.</li>
+</ul>
+<h2>MVP Mantra</h2>
+<p>Paste your GitHub. Meet the creature your commits created.</p>
+</section>
+<section class="doc-section"><h1>ShipGotchi Product Brief</h1>
+<h2>One-Liner</h2>
+<p>ShipGotchi is a premium digital toy for builders: paste a GitHub username, hatch a coding companion, and discover its mood, evolution, outfit, and Builder DNA based on how you ship.</p>
+<h2>Challenge Fit</h2>
+<p>The challenge asks for a consumer-facing webapp with at least three working features, no login wall, mobile-friendly execution, and a production URL that judges can test live.</p>
+<p>ShipGotchi fits because:</p>
+<ul>
+<li>It is consumer-facing and immediately understandable.</li>
+<li>It uses public GitHub usernames, so there is no login or OAuth risk.</li>
+<li>It naturally supports several interactive features without feeling bloated.</li>
+<li>It is highly visual, which matters for a live judging stream.</li>
+<li>It aligns with Dollar Vibe Club&#39;s builder audience and post-sprint launch prize.</li>
+</ul>
+<h2>Audience</h2>
+<p>Primary users:</p>
+<ul>
+<li>Builders, vibe coders, indie hackers, students, and GitHub users.</li>
+<li>DVC stream viewers who want a quick, funny, shareable result.</li>
+</ul>
+<p>Judges:</p>
+<ul>
+<li>Need to understand and test the product in under 60 seconds.</li>
+<li>Need to see at least three working features without reading instructions.</li>
+<li>Need a stable mobile-friendly production URL.</li>
+</ul>
+<h2>Product Promise</h2>
+<p>ShipGotchi turns dry public GitHub activity into a living, charming identity moment. It does not ask users to understand analytics. It gives them a creature.</p>
+<h2>MVP Scope</h2>
+<p>The MVP should contain exactly five standout features:</p>
+<ol>
+<li>GitHub Hatch</li>
+<li>Pet Mood And Evolution</li>
+<li>Premium Sprite Moment</li>
+<li>Builder DNA Card</li>
+<li>Compare / Party Mode</li>
+</ol>
+<p>These features are enough to feel complete, replayable, and demo-worthy without requiring accounts, payments, native apps, extensions, or complex infrastructure.</p>
+<h2>What We Are Not Building In The Sprint</h2>
+<ul>
+<li>User accounts</li>
+<li>Global leaderboard</li>
+<li>Real desktop overlay pet</li>
+<li>Browser extension</li>
+<li>Native desktop app</li>
+<li>Real-time AI image generation</li>
+<li>GitHub OAuth</li>
+<li>Game economy</li>
+<li>Pet inventory</li>
+<li>Multiplayer persistence</li>
+</ul>
+<h2>Long-Term Vision</h2>
+<p>After the sprint, ShipGotchi can become a persistent builder companion:</p>
+<ul>
+<li>Lives as a web widget, browser extension, desktop app, or IDE sidebar.</li>
+<li>Grows as you ship.</li>
+<li>Celebrates commits, PRs, launches, and streaks.</li>
+<li>Adds friend leaderboards, teams, and seasonal collectible forms.</li>
+</ul>
+<p>For the sprint, we only hint at this vision through a web-based &quot;Desk Mode&quot; where the pet can dock in the corner of the page.</p>
+</section>
+<section class="doc-section"><h1>ShipGotchi MVP Specification</h1>
+<h2>MVP Goal</h2>
+<p>Deliver a polished, mobile-first webapp that produces a delightful result from any public GitHub username within 10 seconds.</p>
+<h2>Core Flow</h2>
+<ol>
+<li>User lands on ShipGotchi.</li>
+<li>User enters a GitHub username or taps a sample username.</li>
+<li>App fetches public GitHub profile, repos, and events.</li>
+<li>Loading ritual plays: &quot;Scanning commit aura...&quot;</li>
+<li>Pet hatches with animation.</li>
+<li>User sees pet, mood, level, evolution, outfit, and Builder DNA.</li>
+<li>User can add more usernames to compare pets locally.</li>
+<li>User can generate a polished share card.</li>
+</ol>
+<h2>Feature 1: GitHub Hatch</h2>
+<h3>User Story</h3>
+<p>As a visitor, I want to paste any public GitHub username so I can instantly hatch a pet without logging in.</p>
+<h3>Requirements</h3>
+<ul>
+<li>Single prominent input on first screen.</li>
+<li>Sample usernames available as quick chips.</li>
+<li>Fetch public GitHub data:<ul>
+<li>User profile</li>
+<li>Recent public events</li>
+<li>Public repositories</li>
+</ul>
+</li>
+<li>Fetch via our own <code>/api/github</code> proxy (authenticated token + caching), never the GitHub API directly. See Technical Plan.</li>
+<li>Show a premium loading state while data loads.</li>
+<li>Handle invalid usernames gracefully.</li>
+<li>Handle GitHub rate-limit or network failure with sample/demo data fallback (backstop only — the proxy is the primary defense).</li>
+</ul>
+<h3>Acceptance Criteria</h3>
+<ul>
+<li>A judge can type a username and get a result without account creation.</li>
+<li>Empty, invalid, and rate-limited states do not break the UI.</li>
+<li>A sample username can produce a successful demo even if GitHub is unavailable.</li>
+</ul>
+<h2>Feature 2: Pet Mood And Evolution</h2>
+<h3>User Story</h3>
+<p>As a visitor, I want the pet to visibly reflect the user&#39;s shipping activity so the result feels personal.</p>
+<h3>Inputs</h3>
+<ul>
+<li>Recent push events</li>
+<li>Recent repository updates</li>
+<li>Top languages</li>
+<li>Account age</li>
+<li>Public repo count</li>
+<li>Recent event recency</li>
+</ul>
+<h3>Simple Scoring Model</h3>
+<p>Shipping Energy:</p>
+<ul>
+<li>High: multiple push/repo events in the last 7 days</li>
+<li>Medium: some activity in the last 30 days</li>
+<li>Low: no recent activity</li>
+</ul>
+<p>Evolution Level:</p>
+<ul>
+<li>Egg: sparse or new account</li>
+<li>Sprout: low-to-medium activity</li>
+<li>Builder: consistent recent activity</li>
+<li>Overclocked: high recent activity</li>
+<li>Sleepy: quiet account</li>
+</ul>
+<p>Mood:</p>
+<ul>
+<li>Hyped: active in last 24 hours</li>
+<li>Focused: active this week</li>
+<li>Curious: diverse languages/repos</li>
+<li>Sleepy: inactive for 30+ days</li>
+<li>Ancient Sage: old account with deep repo history</li>
+</ul>
+<h3>Acceptance Criteria</h3>
+<ul>
+<li>Pet state changes for different usernames.</li>
+<li>Mood and evolution are explained in plain language.</li>
+<li>The scoring system is deterministic and fast.</li>
+</ul>
+<h2>Feature 3: Premium Sprite Moment</h2>
+<h3>User Story</h3>
+<p>As a visitor, I want the pet reveal to feel premium and emotional.</p>
+<h3>Requirements</h3>
+<ul>
+<li>One mascot species, rendered as <strong>one base + state-driven layers</strong> (body tint, expression, accessory, motion) — not 7 independently generated images. See Visual Direction &quot;Sprite Strategy.&quot;</li>
+<li>Variants map to evolution/mood states.</li>
+<li>Art direction: cute premium toy, soft digital collectible, light builder-lab UI accents.</li>
+<li>Avoid requiring runtime AI image generation.</li>
+<li>Prefer SVG/CSS sprite components for guaranteed character consistency; pre-generated AI renders are an optional swap-in once MVP is stable.</li>
+</ul>
+<h3>Recommended Sprite Set</h3>
+<ul>
+<li>Egg</li>
+<li>Sprout</li>
+<li>Builder</li>
+<li>Overclocked</li>
+<li>Sleepy</li>
+<li>Error/Mystery fallback</li>
+<li>Optional: language outfit overlays</li>
+</ul>
+<h3>Acceptance Criteria</h3>
+<ul>
+<li>Pet is the visual centerpiece.</li>
+<li>Variants are visibly different.</li>
+<li>The result still works if images load slowly or fail.</li>
+</ul>
+<h2>Feature 4: Builder DNA Card</h2>
+<h3>User Story</h3>
+<p>As a visitor, I want a stylish identity card that summarizes my builder personality.</p>
+<h3>Card Contents</h3>
+<ul>
+<li>GitHub avatar and username</li>
+<li>ShipGotchi pet</li>
+<li>Builder class</li>
+<li>Level</li>
+<li>Mood</li>
+<li>Evolution stage</li>
+<li>Top language</li>
+<li>Estimated streak/activity signal</li>
+<li>One memorable personality line</li>
+</ul>
+<h3>Builder Class Examples</h3>
+<ul>
+<li>Midnight Shipper</li>
+<li>Stack Alchemist</li>
+<li>Pixel Mechanic</li>
+<li>Patch Saint</li>
+<li>Launch Goblet</li>
+<li>Refactor Monk</li>
+<li>Repo Ranger</li>
+<li>Bug Whisperer</li>
+<li>Syntax Sprinter</li>
+</ul>
+<h3>Tone</h3>
+<p>Playful, affirming, slightly witty, never mean. The best copy feels like a fortune cookie for developers.</p>
+<h3>Acceptance Criteria</h3>
+<ul>
+<li>The card is readable on mobile.</li>
+<li>The card makes the user want to screenshot/share.</li>
+<li>The card lists enough details that judges can see the GitHub data was used.</li>
+</ul>
+<h2>Feature 5: Compare / Party Mode</h2>
+<h3>User Story</h3>
+<p>As a visitor, I want to compare multiple GitHub users so the product becomes replayable and stream-friendly.</p>
+<h3>Requirements</h3>
+<ul>
+<li>Add up to four usernames in one session.</li>
+<li>Show pets side-by-side.</li>
+<li>Highlight differences:<ul>
+<li>Highest energy</li>
+<li>Sleepiest pet</li>
+<li>Most languages</li>
+<li>Most ancient account</li>
+</ul>
+</li>
+<li>Store only in browser/session state.</li>
+</ul>
+<h3>Acceptance Criteria</h3>
+<ul>
+<li>Judges can compare sample users quickly.</li>
+<li>No backend persistence is required.</li>
+<li>Mobile layout remains usable.</li>
+</ul>
+<h2>Optional Nice-To-Have</h2>
+<p>Desk Mode:</p>
+<ul>
+<li>Pet docks in the bottom-right corner of the web page.</li>
+<li>Pet can be dragged within the page.</li>
+<li>This hints at the future desktop companion without violating the webapp-only rule.</li>
+</ul>
+<p>Desk Mode should be added only after the five MVP features are stable.</p>
+</section>
+<section class="doc-section"><h1>ShipGotchi Experience And Visual Direction</h1>
+<h2>Creative Direction</h2>
+<p>Base style: <strong>cute premium toy</strong>.</p>
+<p>Supporting flavors:</p>
+<ul>
+<li>Light RPG evolution mechanics</li>
+<li>Soft builder-lab UI details</li>
+<li>Share-card polish</li>
+</ul>
+<p>Avoid:</p>
+<ul>
+<li>Dark cyberpunk dominance</li>
+<li>Overly niche anime styling</li>
+<li>Dense dashboards</li>
+<li>Generic GitHub stats pages</li>
+</ul>
+<h2>Design North Star</h2>
+<p>The user should feel like they opened a premium collectible toy, not a developer analytics tool.</p>
+<h2>Visual Keywords</h2>
+<ul>
+<li>Soft</li>
+<li>Tactile</li>
+<li>Collectible</li>
+<li>Rounded but not childish</li>
+<li>Bright</li>
+<li>Crisp</li>
+<li>Expressive</li>
+<li>Stream-friendly</li>
+<li>Screenshot-worthy</li>
+</ul>
+<h2>Mascot Direction</h2>
+<p>Use one mascot species with several forms.</p>
+<p>This keeps execution manageable while preserving delight. Multiple species are a post-MVP expansion.</p>
+<h3>Mascot Personality</h3>
+<p>The mascot should feel:</p>
+<ul>
+<li>Loyal</li>
+<li>Slightly mischievous</li>
+<li>Proud when the user ships</li>
+<li>Sleepy when neglected</li>
+<li>Curious when the user explores many languages</li>
+</ul>
+<h3>Sprite Strategy (solo-safe: one base, layered states)</h3>
+<p><strong>Primary approach — layered, not 7 separate renders.</strong> Build ONE base mascot, then drive its state with composable layers: body tint, eye/mouth expression, a small accessory, and a pose/animation tweak. This guarantees the variants read as <em>the same creature</em> (the hardest part of the &quot;premium toy&quot; promise) and avoids spending hours fighting an image model for character consistency.</p>
+<ul>
+<li>Body: a single SVG/CSS or sprite base.</li>
+<li>State layer: color + expression per evolution/mood.</li>
+<li>Accessory layer: optional outfit overlay by language.</li>
+<li>Motion layer: idle bob, hatch pop, sleepy z&#39;s — CSS or Framer Motion.</li>
+</ul>
+<p>AI-generated full renders (runbook Prompt 6) are a <strong>stretch goal</strong> to swap in per variant if there&#39;s time after the five MVP features are stable — never a dependency for a working demo.</p>
+<h3>Sprite Variants (state targets for the layered system)</h3>
+<ol>
+<li>Egg: before enough data or first hatch</li>
+<li>Sprout: early builder</li>
+<li>Builder: stable activity</li>
+<li>Overclocked: high activity</li>
+<li>Sleepy: inactive</li>
+<li>Mystery: invalid or hidden data</li>
+</ol>
+<h3>Outfit Overlay Ideas</h3>
+<ul>
+<li>JavaScript/TypeScript: tiny star visor</li>
+<li>Python: soft wizard cap</li>
+<li>Rust: bronze armor accent</li>
+<li>Go: runner goggles</li>
+<li>CSS/HTML: paint scarf</li>
+<li>Java: coffee charm</li>
+</ul>
+<p>Outfits should be decorative, not required for MVP correctness.</p>
+<h2>Page Structure</h2>
+<h3>First Screen</h3>
+<p>Purpose: get to the hatch moment fast.</p>
+<p>Elements:</p>
+<ul>
+<li>Brand name: ShipGotchi</li>
+<li>Literal promise: &quot;Paste your GitHub. Meet the creature your commits created.&quot;</li>
+<li>Username input</li>
+<li>Hatch button</li>
+<li>Sample username chips</li>
+<li>Pet egg preview or tiny idle mascot</li>
+</ul>
+<p>No long explanatory text.</p>
+<h3>Loading Ritual</h3>
+<p>Purpose: make waiting feel intentional.</p>
+<p>Possible steps:</p>
+<ul>
+<li>Reading public commits</li>
+<li>Measuring shipping energy</li>
+<li>Sorting language snacks</li>
+<li>Polishing tiny goggles</li>
+<li>Hatching companion</li>
+</ul>
+<p>Keep loading under a few seconds when possible.</p>
+<h3>Result Screen</h3>
+<p>Purpose: show the payoff immediately.</p>
+<p>Primary visual:</p>
+<ul>
+<li>Large pet sprite</li>
+<li>Mood bubble</li>
+<li>Level/evolution badge</li>
+</ul>
+<p>Secondary visual:</p>
+<ul>
+<li>Builder DNA card</li>
+<li>Activity meters</li>
+<li>Language trait</li>
+<li>Personality line</li>
+</ul>
+<p>Actions:</p>
+<ul>
+<li>Compare another builder</li>
+<li>Generate/share card</li>
+<li>Try sample</li>
+<li>Desk Mode, if time allows</li>
+</ul>
+<h2>Copy Style</h2>
+<p>Voice:</p>
+<ul>
+<li>Warm</li>
+<li>Playful</li>
+<li>Premium</li>
+<li>Builder-native</li>
+<li>Not cringe</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>&quot;Your ShipGotchi woke up caffeinated.&quot;</li>
+<li>&quot;Recent commits detected. Tiny goggles equipped.&quot;</li>
+<li>&quot;This pet has seen things in production.&quot;</li>
+<li>&quot;Low activity, high potential. It is napping for strategic reasons.&quot;</li>
+<li>&quot;Your top language shaped its outfit.&quot;</li>
+</ul>
+<h2>Accessibility And Usability</h2>
+<ul>
+<li>High contrast text.</li>
+<li>Large touch targets.</li>
+<li>Keyboard-friendly username input.</li>
+<li>Mobile-first layout.</li>
+<li>No required hover interactions.</li>
+<li>Clear error states.</li>
+<li>Result should still make sense without animation.</li>
+</ul>
+</section>
+<section class="doc-section"><h1>ShipGotchi Technical Plan</h1>
+<h2>Recommended Stack (locked: solo + Vercel)</h2>
+<ul>
+<li><strong>Next.js + TypeScript</strong> — chosen over Vite specifically so the GitHub proxy (below) lives in the same project as <code>app/api/*</code> routes, with zero extra deploy config on Vercel.</li>
+<li>Tailwind CSS for fast, consistent styling.</li>
+<li>All GitHub data fetched <strong>through our own serverless proxy</strong>, not directly from the browser.</li>
+<li><strong>Vercel</strong> deployment (Git-connected, auto-deploy on push).</li>
+</ul>
+<p>The sprint prioritizes speed, polish, and reliability over backend complexity. The one piece of backend we DO build — the proxy — exists purely to keep the live demo alive.</p>
+<h2>Data Sources</h2>
+<p>GitHub public REST API (called server-side from our proxy, never directly from the browser):</p>
+<ul>
+<li><code>GET https://api.github.com/users/{username}</code></li>
+<li><code>GET https://api.github.com/users/{username}/events/public</code></li>
+<li><code>GET https://api.github.com/users/{username}/repos?sort=updated&amp;per_page=20</code></li>
+</ul>
+<p>Optional:</p>
+<ul>
+<li>Repo language URLs returned by repo objects, if time allows.</li>
+</ul>
+<h2>GitHub Proxy (REQUIRED — build in Hour 0-2)</h2>
+<p>Why this is not optional: the unauthenticated GitHub REST API allows only <strong>60 requests/hour per IP</strong>. Our flow uses ~3 calls per username; a single 4-way Compare burns ~12. During live mobile judging, repeated tests — and multiple viewers behind the same network/IP — will exhaust 60 quickly, then every real fetch fails. A proxy with an authenticated token raises the ceiling to <strong>5,000 requests/hour</strong> and lets us cache.</p>
+<p>Design:</p>
+<ul>
+<li>Single route: <code>GET /api/github?username={username}</code>.</li>
+<li>The route reads a <code>GITHUB_TOKEN</code> from Vercel environment variables (a fine-grained PAT with public read scope — no special permissions needed).</li>
+<li>The route makes the 3 GitHub calls server-side, normalizes them, and returns one combined payload (or a clean typed error).</li>
+<li><strong>Cache</strong> responses for ~5 minutes (in-memory per warm lambda, or <code>Cache-Control</code> headers / a tiny edge cache). Repeated demo hits on the same username cost zero GitHub quota.</li>
+<li>The token is <strong>never</strong> exposed to the client. The browser only ever talks to <code>/api/github</code>.</li>
+<li>The route maps GitHub statuses to our UI states: 404 → <code>notFound</code>, 403/rate-limit → <code>rateLimited</code>, network/5xx → <code>networkError</code>.</li>
+</ul>
+<p>The bundled sample data (see scoring/error handling) remains the final safety net if the proxy itself is unavailable. Proxy = primary reliability; sample data = backstop.</p>
+<h2>Data Model</h2>
+<h3>GitHubProfile</h3>
+<ul>
+<li>login</li>
+<li>name</li>
+<li>avatarUrl</li>
+<li>publicRepos</li>
+<li>followers</li>
+<li>createdAt</li>
+<li>htmlUrl</li>
+</ul>
+<h3>GitHubActivity</h3>
+<ul>
+<li>recentPushCount</li>
+<li>recentEventCount</li>
+<li>lastActivityAt</li>
+<li>repoUpdateCount</li>
+<li>topLanguages</li>
+<li>activeDaysEstimate</li>
+<li>accountAgeYears</li>
+</ul>
+<h3>PetProfile</h3>
+<ul>
+<li>username</li>
+<li>displayName</li>
+<li>level</li>
+<li>mood</li>
+<li>evolutionStage</li>
+<li>builderClass</li>
+<li>topLanguage</li>
+<li>energyScore</li>
+<li>personalityLine</li>
+<li>spriteVariant</li>
+<li>outfitTrait</li>
+</ul>
+<h2>Scoring Logic</h2>
+<p>Keep scoring understandable and deterministic.</p>
+<h3>Energy Score</h3>
+<p>Start at 0.</p>
+<ul>
+<li>+30 if active in last 24 hours</li>
+<li>+20 if active in last 7 days</li>
+<li>+10 if active in last 30 days</li>
+<li>+5 per push event in recent public events, capped at 30</li>
+<li>+10 if repos updated recently</li>
+<li>+10 if public repo count is above 20</li>
+<li>+10 if more than 3 languages detected</li>
+</ul>
+<p>Clamp score to 0-100.</p>
+<h3>Evolution Stage</h3>
+<ul>
+<li>0-15: Egg or Sleepy</li>
+<li>16-35: Sprout</li>
+<li>36-65: Builder</li>
+<li>66-85: Evolved</li>
+<li>86-100: Overclocked</li>
+</ul>
+<p>If last activity is older than 30 days, prefer Sleepy unless account age/repo history is very strong.</p>
+<h3>Builder Class</h3>
+<p>Derive from:</p>
+<ul>
+<li>Top language</li>
+<li>Energy score</li>
+<li>Account age</li>
+<li>Repo diversity</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>High energy + TypeScript: Interface Sprinter</li>
+<li>High energy + Python: Script Sorcerer</li>
+<li>Old account + many repos: Ancient Maintainer</li>
+<li>Low recent activity + many repos: Sleeping Architect</li>
+<li>Diverse languages: Stack Alchemist</li>
+</ul>
+<h2>Error Handling</h2>
+<h3>Invalid Username</h3>
+<p>Show Mystery pet and message:</p>
+<p>&quot;That GitHub user did not hatch. Check the spelling or try a sample builder.&quot;</p>
+<h3>Rate Limited</h3>
+<p>Show:</p>
+<p>&quot;GitHub is making us wait. Try a sample hatch while the tiny servers cool down.&quot;</p>
+<p>Then provide sample data path.</p>
+<h3>Network Failure</h3>
+<p>Show retry and sample buttons.</p>
+<h3>Private/No Activity</h3>
+<p>Use profile/repo data if events are sparse. Do not make the user feel punished.</p>
+<h2>Performance</h2>
+<ul>
+<li>Avoid runtime image generation.</li>
+<li>Preload key pet assets.</li>
+<li>Cache fetched users in memory/session storage.</li>
+<li>Keep first result under 10 seconds.</li>
+<li>Use skeleton/loading ritual instead of blank waiting.</li>
+</ul>
+<h2>Deployment Requirements</h2>
+<ul>
+<li><strong>Vercel</strong>, Git-connected, auto-deploy on push to main. Get a live URL in Hour 0-2 (deploy the empty scaffold first, then keep shipping to it).</li>
+<li>Set <code>GITHUB_TOKEN</code> in Vercel project env vars before the proxy goes live.</li>
+<li>Public production URL.</li>
+<li>No login required.</li>
+<li>Mobile-friendly.</li>
+<li>Stable until judging completes.</li>
+<li>Demo sample usernames built into UI.</li>
+</ul>
+</section>
+<section class="doc-section"><h1>ShipGotchi Execution Plan And Agent Workstreams</h1>
+<h2>Build Strategy</h2>
+<p>We plan heavily, then execute. The product is small enough to complete in 24 hours, but polished enough to win if the workstreams stay focused.</p>
+<p><strong>Solo note:</strong> this is a single full-stack builder, so there is no human parallelism. The five workstreams below are a way to <em>organize</em> the work, not five people. Run them as one sequential critical path, or hand individual workstreams to AI subagents that you orchestrate. The timeline below is the sequential reality.</p>
+<h2>Recommended Timeline</h2>
+<h3>Hour 0-2: Setup, Skeleton, And Live URL</h3>
+<ul>
+<li>Scaffold Next.js + TypeScript + Tailwind app.</li>
+<li><strong>Deploy the empty scaffold to Vercel immediately</strong> so a live URL exists from hour 1; every later change just ships to it.</li>
+<li><strong>Build the <code>/api/github</code> proxy</strong> (authenticated token + ~5min cache) and set <code>GITHUB_TOKEN</code> in Vercel env. This is the reliability backbone — do it before the UI.</li>
+<li>Set up design tokens and responsive shell.</li>
+<li>Create the client fetch service that calls <code>/api/github</code> (not GitHub directly).</li>
+<li>Create sample data.</li>
+<li>Establish pet scoring types.</li>
+</ul>
+<h3>Hour 2-6: Core Loop</h3>
+<ul>
+<li>Username input.</li>
+<li>Sample users.</li>
+<li>GitHub fetch.</li>
+<li>Scoring logic.</li>
+<li>Result page.</li>
+<li>Error and fallback states.</li>
+</ul>
+<h3>Hour 6-10: Visual Payoff</h3>
+<ul>
+<li>Pet sprites/variants.</li>
+<li>Hatch animation.</li>
+<li>Builder DNA card.</li>
+<li>Premium mobile layout.</li>
+<li>Copywriting pass.</li>
+</ul>
+<h3>Hour 10-14: Compare Mode</h3>
+<ul>
+<li>Add up to four users.</li>
+<li>Local session state.</li>
+<li>Side-by-side pet cards.</li>
+<li>Comparison highlights.</li>
+</ul>
+<h3>Hour 14-18: Polish And Demo</h3>
+<ul>
+<li>Share card UI.</li>
+<li>Desk Mode if core features are stable.</li>
+<li>Mobile QA.</li>
+<li>Loading ritual.</li>
+<li>Empty/error states.</li>
+</ul>
+<h3>Hour 18-21: Hardening</h3>
+<ul>
+<li>Test GitHub API failures.</li>
+<li>Test invalid usernames.</li>
+<li>Test mobile layout.</li>
+<li>Test production deployment.</li>
+<li>Verify no login required.</li>
+</ul>
+<h3>Hour 21-24: Submission</h3>
+<ul>
+<li>Final deploy.</li>
+<li>Create cover image.</li>
+<li>Write 500-character description.</li>
+<li>Optional short YouTube demo.</li>
+<li>Submit production URL.</li>
+</ul>
+<h2>Workstreams (solo critical path, or AI subagents you orchestrate)</h2>
+<p>These are organizational buckets, not five people. Sequence them; optionally delegate a bucket to a subagent.</p>
+<h3>Workstream 1: Core Data And Scoring</h3>
+<p>Owns:</p>
+<ul>
+<li><code>/api/github</code> serverless proxy (authenticated token + cache)</li>
+<li>GitHub API client (client side, calls the proxy)</li>
+<li>Sample data</li>
+<li>Activity normalization</li>
+<li>Energy score</li>
+<li>Evolution stage</li>
+<li>Builder class</li>
+<li>Error fallbacks</li>
+</ul>
+<p>Deliverables:</p>
+<ul>
+<li><code>GET /api/github?username=</code> proxy route (token + cache, maps statuses to UI states)</li>
+<li><code>getGithubUser(username)</code> (client; calls the proxy)</li>
+<li><code>normalizeGithubActivity(data)</code></li>
+<li><code>createPetProfile(activity)</code></li>
+<li>Test fixtures for active, inactive, invalid, and sample users</li>
+</ul>
+<h3>Workstream 2: Frontend Experience</h3>
+<p>Owns:</p>
+<ul>
+<li>Landing screen</li>
+<li>Username input</li>
+<li>Hatch button</li>
+<li>Loading ritual</li>
+<li>Result layout</li>
+<li>Mobile responsiveness</li>
+</ul>
+<p>Deliverables:</p>
+<ul>
+<li>Complete core user flow</li>
+<li>No-login path</li>
+<li>Sample username chips</li>
+<li>Empty/loading/error/result states</li>
+</ul>
+<h3>Workstream 3: Sprite And Visual System</h3>
+<p>Owns:</p>
+<ul>
+<li>Mascot art direction</li>
+<li>Pet variants</li>
+<li>Sprite component</li>
+<li>Mood/evolution display</li>
+<li>Animation states</li>
+</ul>
+<p>Deliverables:</p>
+<ul>
+<li>Egg, Sprout, Builder, Evolved, Overclocked, Sleepy, Mystery variants</li>
+<li>Lightweight animations</li>
+<li>Asset fallback strategy</li>
+</ul>
+<h3>Workstream 4: Builder DNA And Copy</h3>
+<p>Owns:</p>
+<ul>
+<li>Builder classes</li>
+<li>Personality lines</li>
+<li>Mood labels</li>
+<li>Loading copy</li>
+<li>Submission description</li>
+<li>Demo script</li>
+</ul>
+<p>Deliverables:</p>
+<ul>
+<li>Copy map keyed by mood/stage/language</li>
+<li>Builder DNA card content</li>
+<li>500-character submission copy</li>
+<li>Judge demo script</li>
+</ul>
+<h3>Workstream 5: QA, Deploy, And Submission</h3>
+<p>Owns:</p>
+<ul>
+<li>Production deploy</li>
+<li>Mobile QA</li>
+<li>Browser checks</li>
+<li>API failure checks</li>
+<li>Submission asset checklist</li>
+</ul>
+<p>Deliverables:</p>
+<ul>
+<li>Public URL</li>
+<li>Smoke test report</li>
+<li>Mobile screenshots</li>
+<li>Submission-ready checklist</li>
+</ul>
+<h2>Integration Contracts</h2>
+<h3>PetProfile Contract</h3>
+<p>All UI should consume a single <code>PetProfile</code> object rather than raw GitHub API data.</p>
+<p>Fields:</p>
+<ul>
+<li>username</li>
+<li>avatarUrl</li>
+<li>githubUrl</li>
+<li>level</li>
+<li>mood</li>
+<li>evolutionStage</li>
+<li>builderClass</li>
+<li>topLanguage</li>
+<li>energyScore</li>
+<li>activitySummary</li>
+<li>personalityLine</li>
+<li>spriteVariant</li>
+<li>outfitTrait</li>
+</ul>
+<h3>UI State Contract</h3>
+<p>States:</p>
+<ul>
+<li>idle</li>
+<li>loading</li>
+<li>success</li>
+<li>compare</li>
+<li>notFound</li>
+<li>rateLimited</li>
+<li>networkError</li>
+</ul>
+<h2>Feature Freeze Rule</h2>
+<p>After the core five features work, no new product features should be added unless:</p>
+<ul>
+<li>production deployment is already stable,</li>
+<li>mobile is already verified,</li>
+<li>invalid/rate-limited states work,</li>
+<li>and the feature improves the judging demo within 30 minutes.</li>
+</ul>
+<h2>Cut List If Time Gets Tight</h2>
+<p>Cut in this order:</p>
+<ol>
+<li>Desk Mode</li>
+<li>Share card export/download</li>
+<li>Outfit overlays</li>
+<li>Comparison highlight awards</li>
+<li>Advanced language fetching</li>
+</ol>
+<p>Never cut:</p>
+<ul>
+<li>GitHub hatch</li>
+<li>Pet state changes</li>
+<li>Builder DNA card</li>
+<li>Sample demo path</li>
+<li>Mobile-friendly layout</li>
+</ul>
+</section>
+<section class="doc-section"><h1>ShipGotchi Judging Demo And Submission Kit</h1>
+<h2>Demo Goal</h2>
+<p>Make judges understand the app in 10 seconds and smile within 30 seconds.</p>
+<h2>Demo Script</h2>
+<ol>
+<li>Open ShipGotchi on mobile or desktop.</li>
+<li>Say: &quot;No login. Paste any public GitHub username.&quot;</li>
+<li>Click a sample username.</li>
+<li>Hatch animation plays.</li>
+<li>Pet appears with mood, evolution, Builder DNA, and personality line.</li>
+<li>Add another sample username to Compare Mode.</li>
+<li>Show different pet states side-by-side.</li>
+<li>End on the share/result card.</li>
+</ol>
+<h2>Three Features To List In Submission</h2>
+<ol>
+<li>GitHub username hatch: fetches public GitHub activity and creates a pet.</li>
+<li>Activity-based pet evolution: mood, level, stage, outfit, and class change based on shipping energy.</li>
+<li>Builder DNA and Compare Mode: polished identity card plus local side-by-side pet comparison.</li>
+</ol>
+<h2>Suggested Project Name</h2>
+<p>ShipGotchi</p>
+<h2>Suggested Tagline</h2>
+<p>Paste your GitHub. Meet the creature your commits created.</p>
+<h2>500-Character Submission Description</h2>
+<p>ShipGotchi turns any public GitHub username into a living builder pet. Paste a username, hatch a premium digital companion, and see its mood, evolution, level, outfit, and Builder DNA based on recent public GitHub activity. Compare friends locally, try sample builders with no login, and generate a shareable result card. It is a playful first step toward a persistent companion that grows as you ship.</p>
+<p>Character count: 397</p>
+<h2>Tags</h2>
+<ul>
+<li>github</li>
+<li>toy</li>
+<li>builder</li>
+<li>ai</li>
+<li>game</li>
+<li>no-login</li>
+<li>mobile</li>
+<li>devtools</li>
+<li>social</li>
+<li>dvc</li>
+</ul>
+<h2>Cover Image Direction</h2>
+<p>Composition:</p>
+<ul>
+<li>Large cute ShipGotchi mascot in center.</li>
+<li>GitHub username input behind or below.</li>
+<li>Builder DNA card peeking from side.</li>
+<li>Text: &quot;Paste your GitHub. Hatch your ShipGotchi.&quot;</li>
+</ul>
+<p>Mood:</p>
+<ul>
+<li>Bright premium toy.</li>
+<li>Soft glow.</li>
+<li>Mobile app screenshot feel.</li>
+<li>Avoid dark cyberpunk.</li>
+</ul>
+<h2>Judge Test Checklist</h2>
+<ul>
+<li>Production URL loads publicly.</li>
+<li>No login is required.</li>
+<li>Input accepts a real GitHub username.</li>
+<li>Sample usernames work.</li>
+<li>Invalid username state works.</li>
+<li>Result shows pet state based on GitHub data.</li>
+<li>Result includes Builder DNA card.</li>
+<li>Compare Mode works.</li>
+<li>Mobile layout works.</li>
+<li>The app remains usable if GitHub API fails or rate-limits.</li>
+</ul>
+<h2>Recommended Sample Users</h2>
+<p>Use public, high-signal usernames for demo chips. Verify before launch.</p>
+<ul>
+<li>torvalds</li>
+<li>gaearon</li>
+<li>sindresorhus</li>
+<li>yyx990803</li>
+</ul>
+<p>Add at least one bundled sample data profile so the demo works even if GitHub rate-limits.</p>
+<h2>Final Submission Safety</h2>
+<p>Before submitting:</p>
+<ul>
+<li>Confirm project URL is production (Vercel), not localhost.</li>
+<li>Confirm GITHUB_TOKEN is set in Vercel env and the /api/github proxy returns live data in production.</li>
+<li>Confirm the sample-data backstop still produces a full demo if GitHub/proxy fails.</li>
+<li>Confirm cover image is uploaded.</li>
+<li>Confirm description lists the working features.</li>
+<li>Confirm no required auth wall.</li>
+<li>Confirm URL will stay public through judging.</li>
+<li>Confirm mobile view is clean.</li>
+</ul>
+</section>
+<section class="doc-section"><h1>ShipGotchi Prompt Runbook</h1>
+<p>Date: 2026-05-22
+Purpose: paste-by-paste prompts for building ShipGotchi from an empty project to a submitted build.</p>
+<h2>How To Use This Runbook</h2>
+<p>Use the prompts in order. Each prompt is written so it can be pasted into Codex or a specialist agent with minimal extra context. When running multiple agents, give each agent only the relevant prompt plus the planning docs it needs.</p>
+<p>Recommended order:</p>
+<ol>
+<li>Master setup prompt</li>
+<li>Architecture and scaffold prompt</li>
+<li>Core data/scoring agent prompt</li>
+<li>Frontend experience agent prompt</li>
+<li>Sprite/art direction agent prompt</li>
+<li>Builder DNA/copy agent prompt</li>
+<li>Integration prompt</li>
+<li>QA and hardening prompt</li>
+<li>Deployment prompt</li>
+<li>Submission prompt</li>
+</ol>
+<p>Do not add new features unless the five MVP features are stable.</p>
+<hr>
+<h1>Prompt 1: Master Setup</h1>
+<pre><code class="language-text">We are building ShipGotchi for the Dollar Vibe Club 24-Hour Open Build Sprint, Track 2: Vibe Gotchi.
+
+Read the planning docs in this workspace before making implementation decisions:
+- docs/00-shipgotchi-planning-index.md
+- docs/01-product-brief.md
+- docs/02-mvp-specification.md
+- docs/03-experience-visual-direction.md
+- docs/04-technical-plan.md
+- docs/05-execution-plan-agent-workstreams.md
+- docs/06-judging-demo-submission-kit.md
+- docs/07-prompt-runbook.md
+
+Locked decisions (see planning index): solo full-stack builder, Next.js + TypeScript + Tailwind, Vercel hosting, a REQUIRED /api/github serverless proxy, and a layered (one-base) sprite system.
+
+Goal:
+Build a no-login, mobile-first consumer webapp where a visitor enters any public GitHub username and instantly hatches a premium digital pet whose mood, evolution, outfit, and Builder DNA are based on public GitHub activity.
+
+MVP features:
+1. GitHub Hatch
+2. Pet Mood and Evolution
+3. Premium Sprite Moment
+4. Builder DNA Card
+5. Compare / Party Mode
+
+Rules:
+- No login required.
+- Webapp only.
+- Public production URL.
+- Mobile-friendly.
+- Minimum 3 interactive features.
+- Keep scope tight.
+- Prioritize a stable judging demo over extra features.
+
+First task:
+Inspect the workspace, identify whether a project already exists, and recommend the fastest implementation path within the locked stack (Next.js + TS + Tailwind on Vercel). If empty, scaffold it. Do not implement features yet until you summarize the scaffold choice and file structure.
+</code></pre>
+<hr>
+<h1>Prompt 2: Scaffold And Architecture</h1>
+<pre><code class="language-text">Implement the ShipGotchi app scaffold.
+
+Stack is locked: Next.js (App Router) + TypeScript + Tailwind CSS. We use Next specifically so the GitHub proxy lives in the same project as the app/api routes and deploys to Vercel with zero extra config. Do not waste time on a complex design-system setup.
+
+Create a clean architecture:
+- app shell / main page
+- app/api/github route (serverless proxy — see Prompt 3)
+- components for hatch form, loading ritual, pet display, Builder DNA card, compare mode, and error states
+- a client service that fetches from /api/github (NOT the GitHub API directly)
+- pure utility module for scoring and pet profile generation
+- sample data fixtures for demo fallback
+- asset folder for pet sprites
+
+Constraints:
+- No auth, no login.
+- No database required.
+- No runtime AI image generation.
+- The UI must work with sample data even if the proxy/GitHub fails.
+- Mobile-first.
+
+After scaffolding:
+1. Run install/build/lint and report results.
+2. Deploy the empty scaffold to Vercel so a live production URL exists immediately, then report the URL.
+</code></pre>
+<hr>
+<h1>Prompt 3: Core Data And Scoring Agent</h1>
+<pre><code class="language-text">You are the Core Data and Scoring agent for ShipGotchi.
+
+Read:
+- docs/02-mvp-specification.md
+- docs/04-technical-plan.md
+- docs/05-execution-plan-agent-workstreams.md
+
+Your task:
+Implement the GitHub proxy, data layer, and deterministic pet scoring system.
+
+Deliver:
+0. A serverless proxy at app/api/github (GET ?username=) that:
+   - reads GITHUB_TOKEN from env (server-side only, never sent to the client)
+   - fetches profile + recent public events + recent repos server-side
+   - caches responses ~5 minutes to conserve GitHub quota
+   - returns one normalized payload, or a typed error mapping 404 -&gt; notFound, 403/rate-limit -&gt; rateLimited, 5xx/network -&gt; networkError
+   Why: unauthenticated GitHub is 60 req/hr per IP and will die during live judging; an authenticated proxy gives 5,000/hr plus caching.
+1. A client GitHub service that fetches from /api/github (NOT api.github.com directly).
+2. Normalization logic that produces a GitHubActivity object.
+3. A createPetProfile(activity) function that returns:
+   - username
+   - avatarUrl
+   - githubUrl
+   - level
+   - mood
+   - evolutionStage
+   - builderClass
+   - topLanguage
+   - energyScore
+   - activitySummary
+   - personalityLine
+   - spriteVariant
+   - outfitTrait
+4. Sample fixture profiles for:
+   - very active builder
+   - normal builder
+   - sleepy/inactive builder
+   - old/legend account
+   - invalid/rate-limited fallback
+5. Unit tests or simple verification scripts for scoring outputs if the project has a test setup.
+
+Important:
+- Keep scoring simple, explainable, and deterministic.
+- Never make low activity feel insulting.
+- Handle rate limits, not found, network failure, and sparse data.
+- Return a UI-friendly error state instead of throwing raw errors into components.
+
+Acceptance:
+Different sample users should produce visibly different moods, levels, classes, and sprite variants.
+</code></pre>
+<hr>
+<h1>Prompt 4: Frontend Experience Agent</h1>
+<pre><code class="language-text">You are the Frontend Experience agent for ShipGotchi.
+
+Read:
+- docs/01-product-brief.md
+- docs/02-mvp-specification.md
+- docs/03-experience-visual-direction.md
+- docs/05-execution-plan-agent-workstreams.md
+
+Your task:
+Build the complete user flow from first screen to result.
+
+Screens/states:
+1. Landing / hatch state
+2. Loading ritual
+3. Result state
+4. Error state
+5. Compare / Party Mode state
+
+Required UI:
+- Brand: ShipGotchi
+- Tagline: &quot;Paste your GitHub. Meet the creature your commits created.&quot;
+- Username input
+- Hatch button
+- Sample username chips
+- Loading ritual with playful scan steps
+- Pet result section
+- Builder DNA card section
+- Compare another builder action
+- Up to 4 local comparison cards
+
+Design direction:
+- Cute premium toy.
+- Light RPG stats.
+- Soft builder-lab accents.
+- Mobile-first.
+- No dense dashboard feeling.
+
+Important:
+- The pet is the hero, not a small decoration.
+- Keep text concise.
+- Make the first successful hatch feel delightful within 10 seconds.
+- Avoid feature explanation blocks on the page.
+
+Acceptance:
+A judge can open the site, click a sample username, see a pet result, and compare another username without needing instructions.
+</code></pre>
+<hr>
+<h1>Prompt 5: Sprite And Art Direction Agent</h1>
+<pre><code class="language-text">You are the Sprite and Art Direction agent for ShipGotchi.
+
+Read:
+- docs/03-experience-visual-direction.md
+- docs/02-mvp-specification.md
+
+Your task:
+Build the visual pet system as ONE base mascot with state-driven layers — not 7 independent images. Layers: body tint, expression, accessory, and motion. This guarantees the variants read as the same creature and avoids fighting an image model for consistency.
+
+Art direction:
+Cute premium toy, soft digital collectible, expressive, friendly, mobile-friendly, screenshot-worthy. Add only light builder-lab/RPG flavor.
+
+State targets (driven by the layers, all the same creature):
+1. Egg
+2. Sprout
+3. Builder
+4. Evolved
+5. Overclocked
+6. Sleepy
+7. Mystery/error fallback
+
+Optional overlays (accessory layer, by top language):
+- TypeScript/JavaScript: star visor
+- Python: soft wizard cap
+- Rust: bronze armor accent
+- Go: runner goggles
+- CSS/HTML: paint scarf
+
+Primary deliverable:
+- An SVG/CSS sprite component that takes (spriteVariant, mood, outfitTrait) and renders the right layered combination, with light CSS/Framer Motion animation (idle bob, hatch pop, sleepy z&#39;s).
+
+Stretch deliverable (only after the 5 MVP features are stable):
+- Swap in pre-generated AI renders per variant using runbook Prompt 6. Never make the demo depend on these.
+
+Constraints:
+- Do not depend on runtime AI image generation.
+- Transparent or clean backgrounds.
+- Variants must stay visually consistent as the same creature.
+- Pet must be readable at mobile sizes.
+
+Acceptance:
+Each pet state must look distinct, premium, and emotionally readable.
+</code></pre>
+<hr>
+<h1>Prompt 6: AI Image Generation Prompts</h1>
+<p>Use these prompts with an image-generation service if we create sprite assets externally.</p>
+<h2>Global Style Prompt</h2>
+<pre><code class="language-text">Create a cute premium digital toy mascot for a webapp called ShipGotchi. The mascot is a small builder companion born from GitHub commits. Style: soft 3D vinyl toy, collectible, expressive, friendly, polished, bright, high-quality product render, clean silhouette, mobile app mascot, subtle developer-lab details, not dark, not cyberpunk-heavy, not anime-heavy. Transparent background. Same character identity across variants.
+</code></pre>
+<h2>Egg Variant</h2>
+<pre><code class="language-text">Create the Egg form of the ShipGotchi mascot. A cute premium toy egg with tiny glowing code-symbol freckles, soft rounded shape, curious expression hinted through a small crack of light, warm and friendly. Soft 3D vinyl collectible style, transparent background, clean silhouette, mobile app asset.
+</code></pre>
+<h2>Sprout Variant</h2>
+<pre><code class="language-text">Create the Sprout form of the ShipGotchi mascot. Same character as the egg, now a tiny newly hatched builder creature with small rounded body, bright eyes, tiny leaf-like antenna shaped like code brackets, holding a small commit spark. Cute premium toy, soft 3D vinyl collectible, transparent background.
+</code></pre>
+<h2>Builder Variant</h2>
+<pre><code class="language-text">Create the Builder form of the ShipGotchi mascot. Same character, now confident and active, wearing tiny soft builder goggles and a small utility scarf, holding a glowing commit cube. Cute premium toy, soft 3D vinyl collectible, expressive, friendly, transparent background.
+</code></pre>
+<h2>Evolved Variant</h2>
+<pre><code class="language-text">Create the Evolved form of the ShipGotchi mascot. Same character, more polished and heroic, larger expressive eyes, subtle badge on chest, tiny floating code sparks around it, premium collectible toy, playful RPG evolution energy, bright and friendly, transparent background.
+</code></pre>
+<h2>Overclocked Variant</h2>
+<pre><code class="language-text">Create the Overclocked form of the ShipGotchi mascot. Same character, excited and powered up, tiny glowing goggles, energetic pose, harmless bright commit sparks, premium cute toy, celebratory not aggressive, soft 3D vinyl collectible, transparent background.
+</code></pre>
+<h2>Sleepy Variant</h2>
+<pre><code class="language-text">Create the Sleepy form of the ShipGotchi mascot. Same character, cozy and napping, soft blanket or tiny hoodie, dim commit spark beside it, sweet and lovable, not sad or punished, premium toy style, transparent background.
+</code></pre>
+<h2>Mystery Variant</h2>
+<pre><code class="language-text">Create the Mystery fallback form of the ShipGotchi mascot. Same character partly hidden in a soft translucent mystery bubble, curious eyes visible, gentle question mark-shaped glow, friendly error state, premium cute toy style, transparent background.
+</code></pre>
+<hr>
+<h1>Prompt 7: Builder DNA And Copy Agent</h1>
+<pre><code class="language-text">You are the Builder DNA and Copy agent for ShipGotchi.
+
+Read:
+- docs/02-mvp-specification.md
+- docs/03-experience-visual-direction.md
+- docs/06-judging-demo-submission-kit.md
+
+Your task:
+Create the personality/copy system that makes the app feel alive.
+
+Deliver:
+1. Builder class names mapped to common activity/language patterns.
+2. Mood labels and descriptions.
+3. Evolution descriptions.
+4. Loading ritual copy.
+5. Personality lines for each mood/class combination.
+6. Error copy for invalid username, rate limit, network failure, and sparse data.
+7. Final submission description under 500 characters.
+
+Tone:
+Warm, playful, premium, builder-native, never cruel.
+
+Avoid:
+- Long explanations
+- Mean roasts
+- Overused developer memes
+- Copy that requires insider knowledge to understand
+
+Acceptance:
+The copy should make the result feel personal and screenshot-worthy while staying clear for judges.
+</code></pre>
+<hr>
+<h1>Prompt 8: Integration Prompt</h1>
+<pre><code class="language-text">Integrate the ShipGotchi workstreams into one polished product.
+
+Read all docs in /docs, especially:
+- docs/02-mvp-specification.md
+- docs/03-experience-visual-direction.md
+- docs/04-technical-plan.md
+- docs/05-execution-plan-agent-workstreams.md
+
+Tasks:
+1. Wire the hatch form to the GitHub data service.
+2. Convert GitHub data into a PetProfile.
+3. Render the correct pet sprite variant from PetProfile.spriteVariant.
+4. Render Builder DNA from the PetProfile contract.
+5. Add local Compare Mode for up to 4 users.
+6. Add sample username chips and bundled sample data fallback.
+7. Ensure loading, success, not found, rate-limited, and network error states all look intentional.
+8. Make the app responsive and polished on mobile.
+
+Do not add new major features.
+
+Acceptance:
+The full user flow works from a clean page load:
+landing -&gt; hatch -&gt; loading -&gt; pet result -&gt; compare mode -&gt; share/result card.
+</code></pre>
+<hr>
+<h1>Prompt 9: QA And Hardening Agent</h1>
+<pre><code class="language-text">You are the QA and Hardening agent for ShipGotchi.
+
+Read:
+- docs/02-mvp-specification.md
+- docs/04-technical-plan.md
+- docs/06-judging-demo-submission-kit.md
+
+Your task:
+Break the app before judges do.
+
+Test:
+1. Valid active GitHub usernames.
+2. Valid inactive GitHub usernames.
+3. Invalid usernames.
+4. Empty input.
+5. GitHub API rate-limit behavior.
+6. Network failure if possible.
+7. Mobile viewport.
+8. Desktop viewport.
+9. Compare Mode with 2, 3, and 4 users.
+10. Fresh production deployment URL.
+
+Required fixes:
+- No raw errors visible to users.
+- No login required.
+- No layout overlap on mobile.
+- No broken sprite states.
+- Sample data path must work without GitHub.
+
+Report:
+- What passed.
+- What failed.
+- What was fixed.
+- Remaining risks.
+</code></pre>
+<hr>
+<h1>Prompt 10: Deployment Agent</h1>
+<pre><code class="language-text">Deploy ShipGotchi to a public production URL.
+
+Read:
+- docs/06-judging-demo-submission-kit.md
+
+Tasks:
+1. Build the app locally.
+2. Fix build errors.
+3. Deploy to Vercel (Git-connected, auto-deploy on push).
+4. Confirm GITHUB_TOKEN is set in Vercel env and the /api/github proxy returns live data in production.
+5. Verify the production URL in a browser.
+6. Test the core judge path on production:
+   - open URL
+   - click sample username
+   - hatch result
+   - compare another user
+   - view Builder DNA
+7. Confirm no login is required.
+8. Confirm mobile layout is usable.
+9. Hammer the proxy: repeat fetches + a 4-way compare and confirm caching keeps it from rate-limiting; confirm sample-data backstop still works if the proxy is forced to fail.
+
+Deliver:
+- Production URL
+- Smoke test summary
+- Any limitations judges should know, if unavoidable
+</code></pre>
+<hr>
+<h1>Prompt 11: Submission Assets Agent</h1>
+<pre><code class="language-text">Prepare ShipGotchi submission assets for Dollar Vibe Club.
+
+Read:
+- docs/06-judging-demo-submission-kit.md
+
+Deliver:
+1. Final project name.
+2. Final tagline.
+3. Final under-500-character submission description.
+4. 10 tags.
+5. Cover image concept or actual cover image.
+6. Optional 60-90 second demo video script.
+7. Three working features to list clearly.
+
+Submission details:
+Project name: ShipGotchi
+Tagline: Paste your GitHub. Meet the creature your commits created.
+
+Working features:
+1. GitHub username hatch.
+2. Activity-based pet evolution.
+3. Builder DNA and Compare Mode.
+
+Make the submission sound polished, launchable, and easy to judge.
+</code></pre>
+<hr>
+<h1>Prompt 12: Final Judge Demo Rehearsal</h1>
+<pre><code class="language-text">Run a final judge demo rehearsal for ShipGotchi.
+
+Use the production URL.
+
+Demo path:
+1. Open the app.
+2. Click a sample username.
+3. Wait for hatch.
+4. Explain the pet mood, evolution, level, and Builder DNA.
+5. Add another username to Compare Mode.
+6. Show side-by-side difference.
+7. Show share/result card.
+
+Time target:
+The core value should be obvious within 30 seconds.
+
+Check:
+- Is the first screen instantly understandable?
+- Does the pet feel like the hero?
+- Are the five MVP features visible?
+- Does the app recover gracefully from bad input?
+- Is mobile clean?
+- Would a stream audience understand it without explanation?
+
+Deliver:
+A final go/no-go recommendation and a short list of only must-fix issues.
+</code></pre>
+<hr>
+<h1>Prompt 13: Emergency Scope Cut</h1>
+<p>Use this prompt if time is running out.</p>
+<pre><code class="language-text">We are close to deadline. Cut ShipGotchi down to the strongest shippable judging demo.
+
+Protect these features:
+1. GitHub hatch or sample-data hatch.
+2. Pet mood/evolution visual.
+3. Builder DNA card.
+4. Mobile-friendly production URL.
+5. No-login judging path.
+
+Cut in this order:
+1. Desk Mode.
+2. Share card export/download.
+3. Outfit overlays.
+4. Advanced comparison awards.
+5. Advanced language fetching.
+
+Task:
+Identify unstable or unfinished features, remove or hide them, and make the remaining path feel intentional and polished.
+
+Acceptance:
+A judge can still complete a delightful demo in under 60 seconds.
+</code></pre>
+<hr>
+<h1>Prompt 14: Post-Sprint Vision Pitch</h1>
+<p>Use this for the submission, demo narration, or follow-up if ShipGotchi places.</p>
+<pre><code class="language-text">Write a concise post-sprint vision pitch for ShipGotchi.
+
+Positioning:
+ShipGotchi starts as a no-login web toy that turns public GitHub activity into a living builder pet. After the sprint, it can become a persistent companion that lives beside your work and grows as you ship.
+
+Future expansion ideas:
+- Desktop/web companion mode
+- Browser extension
+- Team pets
+- Streak celebrations
+- Seasonal evolution forms
+- Shareable launch cards
+- DVC builder community leaderboard
+
+Keep it concise, exciting, and realistic. Emphasize that the sprint MVP already proves the core loop: public activity -&gt; emotional pet -&gt; shareable identity.
+</code></pre>
+<hr>
+<h1>Completion Checklist</h1>
+<p>Before submitting, confirm:</p>
+<ul>
+<li>The app is deployed to a public Vercel URL.</li>
+<li>GITHUB_TOKEN is set in Vercel env and the /api/github proxy returns live data in production.</li>
+<li>Caching confirmed: repeated fetches + a 4-way compare do not rate-limit.</li>
+<li>Sample-data backstop works even if the proxy is forced to fail.</li>
+<li>No login is required.</li>
+<li>Sample usernames work.</li>
+<li>At least one real GitHub username works.</li>
+<li>Invalid username state works.</li>
+<li>Pet state visibly changes across users.</li>
+<li>Builder DNA card is readable on mobile.</li>
+<li>Compare Mode works.</li>
+<li>Cover image is ready.</li>
+<li>Submission copy is under 500 characters.</li>
+<li>The production URL will stay online through judging.</li>
+</ul>
+</section>
+<section class="doc-section"><h1>ShipGotchi Sprite Asset Prompts (Premium Render Track)</h1>
+<p>Purpose: generate best-in-class mascot art that can be swapped in to replace (or sit on top of) the built-in SVG sprite. The SVG already ships a working, on-brand creature; these renders are the polish upgrade. <strong>Do not let asset generation block the build</strong> — drop PNGs in when they&#39;re ready.</p>
+<h2>The non-negotiable: ONE creature, seven states</h2>
+<p>The single biggest failure mode is seven renders that look like seven different animals. Everything below is engineered to prevent that. Generate the <strong>reference sheet first</strong>, lock the character, then derive every state from it.</p>
+<hr>
+<h2>Character Bible (paste this verbatim into every prompt)</h2>
+<pre><code class="language-text">CHARACTER: &quot;ShipGotchi&quot; — a small, round designer-toy creature; a loyal builder companion hatched from code.
+BODY: chibi proportions, oversized head on a soft egg/bean-shaped body (~1.2:1 tall), short stubby arms, two small rounded feet. Smooth premium vinyl finish with a soft satin sheen and gentle subsurface glow.
+FACE: two oversized glossy black eyes with twin white catchlights, small rosy round cheeks, a tiny simple mouth. Warm, friendly, a little mischievous.
+SIGNATURE: a two-prong antenna shaped like an angle-bracket pair &quot;&lt; &gt;&quot; curling up from the top of the head. This antenna MUST appear on every form (except the Egg).
+DEFAULT COLORWAY: warm coral-orange body with a soft cream belly highlight (state colorways override this where noted).
+STYLE: high-end collectible designer toy (Pop Mart / Sonny Angel energy), soft 3D render, studio softbox lighting, gentle rim light, subtle ambient occlusion, clean rounded silhouette, tiny contact shadow.
+MOOD OF BRAND: cute, premium, tactile, screenshot-worthy. Bright and friendly.
+</code></pre>
+<h2>Negative / avoid (append to every prompt)</h2>
+<pre><code class="language-text">AVOID: dark cyberpunk, neon grunge, horror, sharp teeth, realistic animal, human face, text, watermark, logos, busy background, clutter, harsh shadows, low-res, flat clip-art, anime line-art, multiple characters, extra limbs, melted/deformed shapes.
+</code></pre>
+<h2>Output spec (every asset)</h2>
+<ul>
+<li>1:1 square, <strong>transparent background</strong> (or solid #FFF6EC then remove), centered, with ~12% padding on all sides so scale is consistent across variants.</li>
+<li>Same camera: straight-on, slight 5° high angle, eye-level-ish, identical zoom/scale between variants.</li>
+<li>1024×1024 minimum (2048 preferred for crisp retina). Export PNG.</li>
+<li>Keep the contact shadow inside the frame; no cropping of antenna or feet.</li>
+</ul>
+<hr>
+<h2>Step 1 — Reference sheet (generate this FIRST)</h2>
+<pre><code class="language-text">[CHARACTER BIBLE]
+Create a clean character reference of this single creature in its default coral-orange colorway: front view, neutral happy expression, standing, full body, centered, soft studio lighting on a plain #FFF6EC background, premium soft-3D designer-toy render. Establish the canonical look. [OUTPUT SPEC] [AVOID]
+</code></pre>
+<p>Pick the best result. That image is your <strong>anchor</strong>. Use it as the reference for every variant below.</p>
+<h2>Step 2 — Lock consistency by model</h2>
+<ul>
+<li><strong>Midjourney:</strong> generate the anchor, then for each variant use <code>--cref &lt;anchor_url&gt; --cw 100</code> (character reference, full weight) and a fixed <code>--seed</code>. Add <code>--sref &lt;anchor_url&gt;</code> to also lock the rendering style.</li>
+<li><strong>Nano Banana / Gemini 2.5 Flash Image:</strong> upload the anchor and prompt &quot;Using the SAME character shown, render it as … keep identical body shape, colors, eyes, and antenna.&quot; Iterate by re-feeding the anchor each time.</li>
+<li><strong>GPT Image (ChatGPT):</strong> upload the anchor and ask for an edit/restyle into each state, repeating &quot;same character, same proportions and colors.&quot;</li>
+<li><strong>Higgsfield / others:</strong> use their image-reference / character-lock feature with the anchor; otherwise paste the full Character Bible and a strict &quot;same creature&quot; instruction every time.</li>
+</ul>
+<p>Always render the <strong>Builder</strong> form second (it&#39;s the most &quot;default&quot;) to confirm the anchor reproduces before doing the rest.</p>
+<hr>
+<h2>Step 3 — Per-variant prompts</h2>
+<p>Each variant = <code>[CHARACTER BIBLE] + the block below + [OUTPUT SPEC] + [AVOID]</code> and the model&#39;s reference-lock from Step 2.</p>
+<h3>Egg (<code>/public/sprites/egg.png</code>)</h3>
+<pre><code class="language-text">STATE — EGG: the creature is still inside its egg, not yet hatched. A smooth coral-orange speckled egg with a soft glossy sheen and a small zig-zag crack across the middle. Through the crack, two glossy curious eyes peek out with tiny catchlights. A few faint glowing code-symbol freckles on the shell. No antenna yet, no limbs. Warm, full of anticipation.
+</code></pre>
+<h3>Sprout (<code>/public/sprites/sprout.png</code>)</h3>
+<pre><code class="language-text">STATE — SPROUT: a tiny, newly hatched version of the creature — smaller, rounder, a little wobbly. Bright wide eyes, eager expression. The &quot;&lt; &gt;&quot; antenna is small and freshly sprouted, with one tiny green leaf curling off it like a seedling. Holding a single small glowing commit-spark in its stubby hands. Soft mint-and-coral colorway. Adorable and hopeful.
+</code></pre>
+<h3>Builder (<code>/public/sprites/builder.png</code>)</h3>
+<pre><code class="language-text">STATE — BUILDER: the confident everyday form. Standing proud, content half-smile, bright eyes. Wearing tiny soft builder goggles pushed up on the forehead and a small utility scarf. The &quot;&lt; &gt;&quot; antenna stands upright. Calm teal-mint body with cream belly. The dependable companion at its healthy baseline.
+</code></pre>
+<h3>Evolved (<code>/public/sprites/evolved.png</code>)</h3>
+<pre><code class="language-text">STATE — EVOLVED: a more heroic, polished form. Slightly taller and sleeker, larger expressive eyes, a small glowing achievement badge on its chest. A few tiny code-sparks float around it. Subtle iridescent sheen on the vinyl. Confident, accomplished, gentle RPG &quot;leveled-up&quot; energy. Grape-violet and warm-gold accents.
+</code></pre>
+<h3>Overclocked (<code>/public/sprites/overclocked.png</code>)</h3>
+<pre><code class="language-text">STATE — OVERCLOCKED: powered-up and joyful, mid-celebration. Big open grin, sparkling eyes, energetic pose (one arm raised). A bright warm aura/halo glows behind it; harmless commit-sparks and tiny lightning glints pop around it. Vivid coral-to-sunshine gradient body. Celebratory, NOT aggressive. Pure shipping euphoria.
+</code></pre>
+<h3>Sleepy (<code>/public/sprites/sleepy.png</code>)</h3>
+<pre><code class="language-text">STATE — SLEEPY: cozy and napping, sweet not sad. Eyes closed in soft happy curves, tiny content smile, wrapped in a small blanket or wearing a little nightcap. A dim commit-spark rests beside it like a nightlight. Soft muted lavender-indigo colorway. Floating &quot;z z z&quot; optional. Lovable, peaceful, &quot;napping for strategic reasons.&quot;
+</code></pre>
+<h3>Mystery (<code>/public/sprites/mystery.png</code>)</h3>
+<pre><code class="language-text">STATE — MYSTERY (fallback): the creature half-hidden inside a soft translucent iridescent bubble, only its curious glossy eyes clearly visible. A gentle question-mark-shaped glow hovers above. Friendly and intriguing, never broken or error-like. Cool violet bubble over the coral body. The &quot;we couldn&#39;t read this one&quot; state, made charming.
+</code></pre>
+<hr>
+<h2>Optional — language outfit overlays</h2>
+<p>Best baked into a couple of hero variants rather than as separate layers. If you want standalone transparent accessories (to composite over any body), render each on its own with: &quot;single accessory only, transparent background, no character, product shot, soft-3D toy style.&quot;</p>
+<ul>
+<li>TypeScript / JavaScript → <strong>Star Visor</strong> (sporty visor band with a small gold star)</li>
+<li>Python → <strong>Wizard Cap</strong> (soft pointed cap with a star)</li>
+<li>Rust → <strong>Bronze Armor</strong> (small bronze shoulder pauldrons)</li>
+<li>Go → <strong>Runner Goggles</strong> (mint racing goggles)</li>
+<li>CSS / HTML → <strong>Paint Scarf</strong> (sky-blue flowing scarf)</li>
+<li>Java → <strong>Coffee Charm</strong> (tiny coffee-cup charm)</li>
+</ul>
+<hr>
+<h2>Step 4 — Post-process + integrate</h2>
+<ol>
+<li>Remove background to clean alpha (if not already transparent); trim, then re-center each on an identical square canvas so all 7 share scale + baseline.</li>
+<li>Export to <code>public/sprites/{egg,sprout,builder,evolved,overclocked,sleepy,mystery}.png</code>.</li>
+<li>Wiring: extend <code>ShipGotchiSprite</code> with an optional image layer — when a PNG exists for the variant, render <code>&lt;img src=&quot;/sprites/{variant}.png&quot;&gt;</code> (with the existing CSS bob/animation on the wrapper) and fall back to the SVG creature if the image 404s or hasn&#39;t been added. This keeps the demo bulletproof: no asset = still a working pet.</li>
+<li>Re-check the Builder DNA card and Compare cards at small sizes — the PNGs must read clearly at 96px.</li>
+</ol>
+</section>
+</body>
+</html>
