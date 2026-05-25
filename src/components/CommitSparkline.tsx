@@ -13,7 +13,18 @@
 //   is applied so the whole thing reads as an old screen.
 // =============================================================================
 
-const DAY_LABELS = ["S", "M", "T", "W", "T", "F", "S"];
+// Day-of-week labels are computed at render time from "today", since the
+// buckets in BuilderStats are oldest→newest with the rightmost slot being
+// today. Hardcoding "S M T W T F S" would mislabel every day except when
+// today happens to be Saturday.
+const DAY_NAMES = ["S", "M", "T", "W", "T", "F", "S"]; // Sun=0 .. Sat=6
+function buildDayLabels(): string[] {
+  const today = new Date().getDay();
+  // slot 0 = 6 days ago, slot 6 = today
+  return Array.from({ length: 7 }, (_, i) =>
+    DAY_NAMES[(today - 6 + i + 7) % 7],
+  );
+}
 
 // Visual ceiling — bars cap at this many pixel cells so the chart doesn't
 // blow out vertically. A "17 commit" day still reads as 8 chunky blocks.
@@ -105,6 +116,7 @@ function PixelHead() {
 export function CommitSparkline({ values }: { values: number[] }) {
   const todayIdx = values.length - 1;
   const total = values.reduce((a, b) => a + b, 0);
+  const dayLabels = buildDayLabels();
 
   return (
     <div
@@ -145,7 +157,7 @@ export function CommitSparkline({ values }: { values: number[] }) {
                   textShadow: highlight ? "0 0 6px rgba(46,230,191,0.55)" : "none",
                 }}
               >
-                {DAY_LABELS[i]}
+                {dayLabels[i]}
               </span>
             </div>
           );

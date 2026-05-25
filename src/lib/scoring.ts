@@ -22,19 +22,54 @@ const isQuiet = (a: GitHubActivity) =>
 const isLegend = (p: GitHubProfile, a: GitHubActivity) =>
   a.accountAgeYears >= 6 && p.publicRepos >= 25;
 
+// Energy is what powers stage + level. It must feel earned: a single push
+// today should NOT max it out, and a 5-year-old account with 0 commits this
+// month should NOT score high just for existing.
+//
+// Budget (max 100):
+//   Recency      0–28   single bucket, no stacking
+//   Volume       0–35   logarithmic on commits (last 7d)
+//   Streak       0–20   ~3 pts per consecutive day, cap 7d
+//   Diversity    0–8    repos touched + language breadth
+//   Tenure       0–9    soft account-quality floor
 export function energyScore(p: GitHubProfile, a: GitHubActivity): number {
-  let score = 0;
+  // ---- Recency (0–28). One bucket only, no stacking. ----
   const days = a.daysSinceLastActivity;
-  if (days !== null) {
-    if (days <= 1) score += 30;
-    if (days <= 7) score += 20;
-    if (days <= 30) score += 10;
-  }
-  score += clamp(a.recentPushCount * 5, 0, 30);
-  if (a.repoUpdateCount > 0) score += 10;
-  if (p.publicRepos > 20) score += 10;
-  if (a.topLanguages.length > 3) score += 10;
-  return clamp(Math.round(score), 0, 100);
+  let recency = 0;
+  if (days === null) recency = 0;
+  else if (days <= 0) recency = 28;
+  else if (days <= 1) recency = 24;
+  else if (days <= 3) recency = 18;
+  else if (days <= 7) recency = 12;
+  else if (days <= 14) recency = 6;
+  else if (days <= 30) recency = 2;
+
+  // ---- Volume (0–35). Use last-7-day commits when available, fall back to
+  // total recentPushCount. Log-ish curve so prolific accounts don't dwarf
+  // everyone, but a single commit isn't worth as much as a streak day. ----
+  const commits7d = a.stats?.commits7d ?? a.recentPushCount;
+  let volume = 0;
+  if (commits7d >= 1) volume += 6;
+  if (commits7d >= 3) volume += 6;
+  if (commits7d >= 6) volume += 7;
+  if (commits7d >= 12) volume += 8;
+  if (commits7d >= 25) volume += 8;
+
+  // ---- Streak (0–20). Rewards consistency, not just one big push. ----
+  const streakDays = a.stats?.streakDays ?? 0;
+  const streak = clamp(streakDays * 3, 0, 20);
+
+  // ---- Diversity (0–8). Spread across repos + languages. ----
+  const repoSpread = clamp(a.repoUpdateCount, 0, 4);
+  const langSpread = clamp(Math.max(0, a.topLanguages.length - 1), 0, 4);
+  const diversity = repoSpread + langSpread;
+
+  // ---- Tenure (0–9). Real accounts get a small floor. ----
+  const ageBonus = clamp(Math.floor(a.accountAgeYears / 2), 0, 5);
+  const repoBonus = p.publicRepos >= 20 ? 4 : p.publicRepos >= 5 ? 2 : 0;
+  const tenure = ageBonus + repoBonus;
+
+  return clamp(Math.round(recency + volume + streak + diversity + tenure), 0, 100);
 }
 
 export function evolutionStage(
