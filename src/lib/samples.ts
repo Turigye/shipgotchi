@@ -115,14 +115,19 @@ export const SAMPLE_FIXTURES: Record<string, Fixture> = {
       accountAgeYears: 14,
     },
   },
-  // Sleepy sample — quiet for a while (Sleepy / Sleepy).
+  // Sleepy sample — quiet for a while (Sleepy / Sleepy). Uses a DiceBear
+  // generated avatar because no real `quiet-quokka` user exists on GitHub
+  // (so the github.com/{login}.png URL 404s and shows a broken image).
   "quiet-quokka": {
-    profile: profile("quiet-quokka", {
+    profile: {
+      login: "quiet-quokka",
       name: "Quiet Quokka",
+      avatarUrl: "https://api.dicebear.com/7.x/bottts-neutral/svg?seed=quiet-quokka&backgroundColor=c5d58b",
+      githubUrl: "https://github.com/",
       publicRepos: 12,
       followers: 40,
       createdAt: "2019-03-01T00:00:00Z",
-    }),
+    },
     activity: {
       recentPushCount: 0,
       recentEventCount: 0,

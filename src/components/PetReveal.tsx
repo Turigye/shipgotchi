@@ -85,7 +85,7 @@ export function PetReveal({
 
       {/* add-another / reset */}
       <motion.div variants={item} className="flex w-full flex-col items-center gap-3 pt-4">
-        {rosterCount < 4 && (
+        {rosterCount < 10 && (
           <>
             <p className="font-mono text-sm uppercase tracking-[0.16em] text-ink-soft">
               hatch a friend to compare
