@@ -53,6 +53,7 @@ export function normalizeActivity(
   repos: RawRepo[],
   createdAt: string,
   now: number = Date.now(),
+  fallbackCommitMessages: string[] = [],
 ): GitHubActivity {
   const safeEvents = Array.isArray(events) ? events : [];
   const safeRepos = Array.isArray(repos) ? repos : [];
@@ -194,7 +195,12 @@ export function normalizeActivity(
     streakDays,
     dailyCommits7d,
     recentRepos: recentRepoNames,
-    commitVibe: classifyCommitVibe(recentMessages),
+    // Prefer messages from the events feed; fall back to messages pulled
+    // directly from recent repos when the events feed came back empty
+    // (common for very fresh pushes — GitHub propagation lag).
+    commitVibe: classifyCommitVibe(
+      recentMessages.length > 0 ? recentMessages : fallbackCommitMessages,
+    ),
   };
 
   return {

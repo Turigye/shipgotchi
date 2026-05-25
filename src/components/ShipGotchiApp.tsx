@@ -15,7 +15,7 @@ import { ThemeToggle } from "./ThemeToggle";
 
 type Phase = "idle" | "hatching" | "revealed";
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
-const MAX = 4;
+const MAX = 10;
 
 export function ShipGotchiApp() {
   const [phase, setPhase] = useState<Phase>("idle");

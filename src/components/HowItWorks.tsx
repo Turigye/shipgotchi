@@ -27,7 +27,7 @@ const STEPS: { title: string; line: string }[] = [
 const JUDGES: string[] = [
   "Paste any public GitHub username — your pet hatches in under 10 seconds.",
   "Try the demo chips for instant offline pets (no rate-limit risk on stage).",
-  "Hatch up to four to fill the Session Board and trigger superlatives.",
+  "Hatch up to ten to fill the Session Board and trigger superlatives.",
   "Mood, evolution stage, level and outfit are all derived deterministically — same input, same pet.",
   "Mobile-friendly. Try resizing the window or opening on a phone.",
   "No login. No tracking. The session board lives in memory only.",

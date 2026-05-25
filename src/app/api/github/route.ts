@@ -82,8 +82,46 @@ export async function GET(request: Request) {
     const events = (eventsRes.ok ? await eventsRes.json() : []) as RawEvent[];
     const repos = (reposRes.ok ? await reposRes.json() : []) as RawRepo[];
 
+    // Fallback commit messages: the public events feed often returns
+    // PushEvent with `commits: []` for fresh pushes (GitHub propagation
+    // lag). Pull messages directly from the top 2 owned recently-pushed
+    // repos so the commit-vibe classifier always has signal. Best-effort —
+    // any failure here is silently ignored.
+    const recentOwnedRepos = repos
+      .filter((r) => !r.fork && r.pushed_at)
+      .slice(0, 2);
+
+    type RawRepoCommit = { commit?: { message?: string } };
+    const commitBatches = await Promise.all(
+      recentOwnedRepos.map((r) =>
+        ghFetch(
+          `/repos/${encodeURIComponent(username)}/${encodeURIComponent(
+            r.name,
+          )}/commits?per_page=20`,
+        )
+          .then((res) =>
+            res.ok ? (res.json() as Promise<RawRepoCommit[]>) : [],
+          )
+          .catch(() => [] as RawRepoCommit[]),
+      ),
+    );
+
+    const fallbackMessages: string[] = [];
+    for (const batch of commitBatches) {
+      for (const c of batch) {
+        const msg = c?.commit?.message;
+        if (msg) fallbackMessages.push(msg);
+      }
+    }
+
     const profile = normalizeProfile(rawUser);
-    const activity = normalizeActivity(events, repos, profile.createdAt);
+    const activity = normalizeActivity(
+      events,
+      repos,
+      profile.createdAt,
+      Date.now(),
+      fallbackMessages,
+    );
     const body: GithubFetchResult = { state: "success", profile, activity };
 
     cache.set(key, { at: Date.now(), body });
