@@ -7,10 +7,10 @@ import type { PetProfile } from "@/lib/types";
 function Stat({ label, value }: { label: string; value: string | number }) {
   return (
     <div className="flex flex-col gap-0.5">
-      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-soft">
+      <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-soft">
         {label}
       </span>
-      <span className="font-display text-base font-600 leading-tight text-ink">{value}</span>
+      <span className="font-display text-lg font-600 leading-tight text-ink">{value}</span>
     </div>
   );
 }
@@ -40,7 +40,7 @@ export function BuilderDNACard({ pet }: { pet: PetProfile }) {
             }}
           />
 
-          {/* header */}
+          {/* header — avatar + name on the left, stage chip + LV pill aligned on the right */}
           <div className="flex items-center gap-3 px-5 pt-5">
             {pet.avatarUrl ? (
               <img
@@ -52,15 +52,20 @@ export function BuilderDNACard({ pet }: { pet: PetProfile }) {
             ) : (
               <div className="h-11 w-11 rounded-full bg-grape/20" />
             )}
-            <div className="min-w-0">
+            <div className="min-w-0 flex-1">
               <p className="truncate font-display text-lg font-700 leading-tight text-ink">
                 {pet.displayName}
               </p>
-              <p className="truncate font-mono text-xs text-ink-soft">@{pet.username}</p>
+              <p className="truncate font-mono text-sm text-ink-soft">@{pet.username}</p>
             </div>
-            <span className="ml-auto rounded-full bg-ink px-2.5 py-1 font-mono text-[11px] font-700 text-cream">
-              LV {pet.level}
-            </span>
+            <div className="flex shrink-0 items-center gap-1.5">
+              <span className="rounded-full bg-coral px-2.5 py-1 font-mono text-[10px] font-700 uppercase tracking-wide text-white shadow">
+                {pet.spriteVariant === "mystery" ? "Mystery" : pet.evolutionStage}
+              </span>
+              <span className="rounded-full bg-ink px-2.5 py-1 font-mono text-[11px] font-700 text-cream">
+                LV {pet.level}
+              </span>
+            </div>
           </div>
 
           {/* sprite stage */}
@@ -71,14 +76,11 @@ export function BuilderDNACard({ pet }: { pet: PetProfile }) {
               outfitTrait={pet.outfitTrait}
               size={150}
             />
-            <span className="absolute right-3 top-3 rounded-full bg-coral px-2.5 py-1 font-mono text-[10px] font-700 uppercase tracking-wide text-white shadow">
-              {pet.spriteVariant === "mystery" ? "Mystery" : pet.evolutionStage}
-            </span>
           </div>
 
           {/* energy meter */}
           <div className="px-5 pt-4">
-            <div className="mb-1 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.16em] text-ink-soft">
+            <div className="mb-1 flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.16em] text-ink-soft">
               <span>Shipping energy</span>
               <span className="text-ink">{pet.energyScore}/100</span>
             </div>

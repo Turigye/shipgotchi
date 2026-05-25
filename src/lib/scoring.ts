@@ -2,6 +2,7 @@
 
 import { builderClass, outfitForLanguage, personalityLine } from "./copy";
 import type {
+  BuilderStats,
   EvolutionStage,
   GitHubActivity,
   GitHubProfile,
@@ -102,6 +103,67 @@ function activitySummary(a: GitHubActivity): string {
   return parts.join(" · ");
 }
 
+// Happiness is a mood-and-streak readout, separate from raw energy.
+function happinessFor(m: Mood, days: number | null): number {
+  let base: number;
+  switch (m) {
+    case "Hyped":
+      base = 100;
+      break;
+    case "Focused":
+      base = 88;
+      break;
+    case "Curious":
+      base = 78;
+      break;
+    case "Ancient Sage":
+      base = 70;
+      break;
+    case "Sleepy":
+      base = 28;
+      break;
+  }
+  if (days !== null && days > 14) base -= 10;
+  return clamp(Math.round(base), 0, 100);
+}
+
+// Hunger climbs with idle time — full when ≥10 days quiet, empty when active today.
+function hungerFor(days: number | null): number {
+  if (days === null) return 60;
+  if (days <= 0) return 0;
+  return clamp(Math.round((days / 10) * 100), 0, 100);
+}
+
+// Make sure every PetProfile has a stats block, even if upstream fixtures
+// didn't provide the breakdown. Falls back to coarse estimates from the
+// existing GitHubActivity fields so the UI never sees holes.
+function ensureStats(a: GitHubActivity): BuilderStats {
+  if (a.stats) return a.stats;
+  const days = a.daysSinceLastActivity ?? 999;
+  const recent = a.recentPushCount;
+  // Distribute the recent pushes across a 7-day window starting from the
+  // last-active day so fixtures still produce a believable sparkline.
+  const dailyCommits7d = [0, 0, 0, 0, 0, 0, 0];
+  if (recent > 0) {
+    const span = Math.min(7, Math.max(1, 7 - Math.min(days, 6)));
+    const perDay = Math.max(1, Math.round(recent / span));
+    for (let i = 6; i > 6 - span; i--) dailyCommits7d[i] = perDay;
+  }
+  const commits24h = days <= 1 ? Math.min(recent, 4) : 0;
+  return {
+    commits24h,
+    commits7d: days <= 7 ? recent : 0,
+    pushEvents: Math.min(recent, 30),
+    pullRequests: Math.min(2, Math.floor(recent / 8)),
+    issues: Math.min(3, Math.floor(recent / 6)),
+    createdEvents: 0,
+    starsAndForks: 0,
+    streakDays: days <= 1 ? Math.min(7, recent) : 0,
+    dailyCommits7d,
+    recentRepos: [],
+  };
+}
+
 export function createPetProfile(
   profile: GitHubProfile,
   activity: GitHubActivity,
@@ -111,6 +173,7 @@ export function createPetProfile(
   const stage = evolutionStage(score, profile, activity);
   const petMood = mood(profile, activity);
   const topLanguage = activity.topLanguages[0] ?? "Polyglot";
+  const stats = ensureStats(activity);
 
   return {
     username: profile.login,
@@ -136,6 +199,9 @@ export function createPetProfile(
     accountAgeYears: activity.accountAgeYears,
     languageCount: activity.topLanguages.length,
     isSample: opts.isSample ?? false,
+    stats,
+    happiness: happinessFor(petMood, activity.daysSinceLastActivity),
+    hunger: hungerFor(activity.daysSinceLastActivity),
   };
 }
 
@@ -159,5 +225,19 @@ export function mysteryPet(username: string): PetProfile {
     accountAgeYears: 0,
     languageCount: 0,
     isSample: false,
+    stats: {
+      commits24h: 0,
+      commits7d: 0,
+      pushEvents: 0,
+      pullRequests: 0,
+      issues: 0,
+      createdEvents: 0,
+      starsAndForks: 0,
+      streakDays: 0,
+      dailyCommits7d: [0, 0, 0, 0, 0, 0, 0],
+      recentRepos: [],
+    },
+    happiness: 50,
+    hunger: 50,
   };
 }

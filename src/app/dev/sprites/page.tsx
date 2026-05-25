@@ -1,4 +1,5 @@
 import { ShipGotchiSprite } from "@/components/ShipGotchiSprite";
+import { LCD_SPRITES, LCD_STATE_ORDER } from "@/lib/lcd-sprites";
 import type { Mood, SpriteVariant } from "@/lib/types";
 
 export const metadata = {
@@ -71,6 +72,44 @@ export default function SpritesQAPage() {
           Hard refresh after editing patterns.
         </p>
       </header>
+
+      <section className="mb-12">
+        <h2 className="mb-4 font-display text-xl font-600 text-ink">
+          LCD v2 — all 12 raster animations
+        </h2>
+        <p className="mb-4 font-body text-xs text-ink-soft">
+          Source of truth: <code>/public/lcd-sprites/</code>. Loaded as GIF, rendered with{" "}
+          <code>image-rendering: pixelated</code>.
+        </p>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+          {LCD_STATE_ORDER.map((state) => {
+            const s = LCD_SPRITES[state];
+            return (
+              <div
+                key={state}
+                className="card-toy flex flex-col items-center gap-2 rounded-2xl p-3"
+              >
+                <div className="grid h-[140px] w-[140px] place-items-center rounded-xl bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.9),rgba(255,246,236,0.4))]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={s.gif}
+                    alt={state}
+                    width={128}
+                    height={128}
+                    style={{ imageRendering: "pixelated", display: "block" }}
+                  />
+                </div>
+                <div className="text-center">
+                  <p className="font-display text-sm font-700 text-ink">{state}</p>
+                  <p className="font-mono text-[10px] uppercase tracking-wider text-ink-soft">
+                    {s.frames}f · {s.fps}fps
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
 
       <section className="mb-12">
         <h2 className="mb-4 font-display text-xl font-600 text-ink">

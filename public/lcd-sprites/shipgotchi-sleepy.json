@@ -1,0 +1,17 @@
+{
+  "name": "shipgotchi-sleepy",
+  "image": "./shipgotchi-sleepy.png",
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frames": 6,
+  "fps": 5,
+  "loop": true,
+  "selectedFrames": [
+    1,
+    3,
+    3,
+    3,
+    3,
+    1
+  ]
+}

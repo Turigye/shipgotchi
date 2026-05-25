@@ -7,7 +7,9 @@ import type { PetProfile } from "@/lib/types";
 import { HatchForm } from "./HatchForm";
 import { LoadingRitual } from "./LoadingRitual";
 import { PetReveal } from "./PetReveal";
-import { CompareTray } from "./CompareTray";
+import { SessionBoard } from "./SessionBoard";
+import { MoodReference } from "./MoodReference";
+import { HowItWorks } from "./HowItWorks";
 import { ShipGotchiSprite } from "./ShipGotchiSprite";
 
 type Phase = "idle" | "hatching" | "revealed";
@@ -71,7 +73,7 @@ export function ShipGotchiApp() {
 
   return (
     <div className="relative flex min-h-dvh flex-col">
-      <header className="mx-auto flex w-full max-w-5xl items-center justify-between px-5 py-5">
+      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-5">
         <button onClick={reset} className="flex items-center gap-2" aria-label="ShipGotchi home">
           <span className="grid h-9 w-9 place-items-center rounded-2xl bg-coral text-white shadow">
             <span className="font-display text-lg font-700">S</span>
@@ -94,27 +96,29 @@ export function ShipGotchiApp() {
               className="flex w-full max-w-2xl flex-col items-center gap-7 pt-6 text-center sm:pt-12"
             >
               <span className="rounded-full bg-grape/12 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-grape">
-                a tamagotchi for builders
+                a tamagotchi for builders · v1.0 public beta
               </span>
 
               <div className="animate-float">
                 <ShipGotchiSprite variant="builder" mood="Hyped" outfitTrait="Star Visor" size={200} />
               </div>
 
-              <h1 className="font-display text-5xl font-700 leading-[0.95] text-ink sm:text-6xl">
-                Meet the creature
+              <h1 className="font-pixel text-6xl leading-[0.95] text-ink sm:text-7xl lcd-glow" style={{ color: "#1FCFB0" }}>
+                Feed your pet
                 <br />
                 <span
                   className="bg-clip-text text-transparent"
-                  style={{ backgroundImage: "linear-gradient(100deg,#FF6A45,#7B5CFF 60%,#1FCFB0)" }}
+                  style={{
+                    backgroundImage: "linear-gradient(100deg,#FF6A45,#7B5CFF 60%,#1FCFB0)",
+                    WebkitTextStroke: "0",
+                  }}
                 >
-                  your commits
-                </span>{" "}
-                created.
+                  by shipping code.
+                </span>
               </h1>
               <p className="max-w-md font-body text-lg text-ink-soft">
-                Paste any public GitHub username and hatch a premium builder pet that grows from how
-                you ship. No login. No setup.
+                Paste any public GitHub handle. We turn the last 100 public events into a living,
+                evolving Tamagotchi. No login. No setup.
               </p>
 
               <HatchForm onHatch={hatch} pending={pending} />
@@ -139,7 +143,7 @@ export function ShipGotchiApp() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex w-full max-w-2xl flex-col items-center pt-4"
+              className="flex w-full max-w-6xl flex-col items-center pt-4"
             >
               <PetReveal
                 pet={hero}
@@ -153,10 +157,24 @@ export function ShipGotchiApp() {
           )}
         </AnimatePresence>
 
-        {phase === "revealed" && <CompareTray pets={roster} onRemove={removeFromRoster} onClear={reset} />}
+        {phase === "revealed" && (
+          <SessionBoard
+            pets={roster}
+            onRemove={removeFromRoster}
+            onClear={reset}
+            onResummon={hatch}
+          />
+        )}
+
+        {phase === "revealed" && (
+          <div className="mx-auto grid w-full max-w-6xl gap-6 px-4 pb-16 md:grid-cols-2">
+            <MoodReference />
+            <HowItWorks />
+          </div>
+        )}
       </main>
 
-      <footer className="mx-auto w-full max-w-5xl px-5 py-6 text-center">
+      <footer className="mx-auto w-full max-w-6xl px-5 py-6 text-center">
         <p className="font-mono text-[11px] text-ink-soft/70">
           Built in 24h for the Dollar Vibe Club sprint · public GitHub data, never stored
         </p>

@@ -1,8 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Fredoka, Nunito, JetBrains_Mono } from "next/font/google";
+import { Fredoka, Nunito, JetBrains_Mono, VT323 } from "next/font/google";
 import "./globals.css";
 
-// Display: rounded, confident, toy-like. Body: clean + warm. Mono: builder-lab data accent.
+// Pixel display for hero/section headings — sets the LCD/Tamagotchi tone.
+const vt323 = VT323({
+  variable: "--ff-pixel",
+  subsets: ["latin"],
+  weight: ["400"],
+});
+
+// Display: rounded, confident, toy-like. Kept for sub-display / chunky labels.
 const fredoka = Fredoka({
   variable: "--ff-display",
   subsets: ["latin"],
@@ -57,7 +64,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fredoka.variable} ${nunito.variable} ${jetbrains.variable} h-full antialiased`}
+      className={`${vt323.variable} ${fredoka.variable} ${nunito.variable} ${jetbrains.variable} h-full antialiased`}
     >
       <body className="min-h-full">{children}</body>
     </html>

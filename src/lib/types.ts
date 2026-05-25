@@ -49,6 +49,22 @@ export interface GitHubActivity {
   repoUpdateCount: number; // repos pushed to within 30 days
   topLanguages: string[];
   accountAgeYears: number;
+  // Richer breakdown used by the Builder Vitals panel + sparkline.
+  // Optional so older fixtures still parse cleanly.
+  stats?: BuilderStats;
+}
+
+export interface BuilderStats {
+  commits24h: number;
+  commits7d: number;
+  pushEvents: number;
+  pullRequests: number;
+  issues: number;
+  createdEvents: number;
+  starsAndForks: number;
+  streakDays: number; // consecutive recent days with public activity
+  dailyCommits7d: number[]; // length 7, oldest -> newest, for sparkline
+  recentRepos: string[]; // up to 6 distinct repo names recently touched
 }
 
 export interface PetProfile {
@@ -69,6 +85,11 @@ export interface PetProfile {
   accountAgeYears: number;
   languageCount: number;
   isSample: boolean;
+  // Vital signs surfaced in the UI panel. Derived deterministically from
+  // GitHubActivity in scoring.ts.
+  stats: BuilderStats;
+  happiness: number; // 0-100, mood-derived
+  hunger: number; // 0-100, inverse of recent activity
 }
 
 // What the proxy returns and what the client service resolves to.

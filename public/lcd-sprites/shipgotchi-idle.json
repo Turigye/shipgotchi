@@ -1,0 +1,19 @@
+{
+  "name": "shipgotchi-idle",
+  "image": "./shipgotchi-idle.png",
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frames": 8,
+  "fps": 7,
+  "loop": true,
+  "selectedFrames": [
+    1,
+    1,
+    2,
+    2,
+    1,
+    3,
+    3,
+    1
+  ]
+}

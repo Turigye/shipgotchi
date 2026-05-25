@@ -1,0 +1,92 @@
+{
+  "idle": {
+    "name": "shipgotchi-idle",
+    "gif": "./shipgotchi-idle.gif",
+    "sheet": "./shipgotchi-idle.png",
+    "metadata": "./shipgotchi-idle.json"
+  },
+  "egg": {
+    "name": "shipgotchi-egg",
+    "gif": "./shipgotchi-egg.gif",
+    "sheet": "./shipgotchi-egg.png",
+    "metadata": "./shipgotchi-egg.json",
+    "workflow": "v2-anchor-sheet-extract-promote",
+    "anchor": "C:/Code/challenge-gpt/assets/anchors/shipgotchi-egg-anchor-v1.png"
+  },
+  "hatch": {
+    "name": "shipgotchi-hatch",
+    "gif": "./shipgotchi-hatch.gif",
+    "sheet": "./shipgotchi-hatch.png",
+    "metadata": "./shipgotchi-hatch.json"
+  },
+  "sprout": {
+    "name": "shipgotchi-sprout",
+    "gif": "./shipgotchi-sprout.gif",
+    "sheet": "./shipgotchi-sprout.png",
+    "metadata": "./shipgotchi-sprout.json",
+    "workflow": "v2-anchor-sheet-extract-promote",
+    "anchor": "C:/Code/challenge-gpt/assets/anchors/shipgotchi-sprout-anchor-v1.png"
+  },
+  "builder": {
+    "name": "shipgotchi-builder",
+    "gif": "./shipgotchi-builder.gif",
+    "sheet": "./shipgotchi-builder.png",
+    "metadata": "./shipgotchi-builder.json",
+    "anchor": "C:/Code/challenge-gpt/assets/anchors/shipgotchi-builder-working-anchor-v1.png",
+    "workflow": "v2-anchor-sheet-extract-promote",
+    "note": "Builder is the laptop/project-building state."
+  },
+  "builderWorking": {
+    "name": "shipgotchi-builder-working",
+    "gif": "./shipgotchi-builder-working.gif",
+    "sheet": "./shipgotchi-builder-working.png",
+    "metadata": "./shipgotchi-builder-working.json",
+    "anchor": "C:/Code/challenge-gpt/assets/anchors/shipgotchi-builder-working-anchor-v1.png",
+    "workflow": "v2-anchor-sheet-extract-promote",
+    "note": "Alias for the same laptop/project-building Builder state."
+  },
+  "evolved": {
+    "name": "shipgotchi-evolved",
+    "gif": "./shipgotchi-evolved.gif",
+    "sheet": "./shipgotchi-evolved.png",
+    "metadata": "./shipgotchi-evolved.json",
+    "anchor": "C:/Code/challenge-gpt/assets/anchors/shipgotchi-evolved-anchor-v1.png",
+    "workflow": "v2-anchor-sheet-extract-promote"
+  },
+  "overclocked": {
+    "name": "shipgotchi-overclocked",
+    "gif": "./shipgotchi-overclocked.gif",
+    "sheet": "./shipgotchi-overclocked.png",
+    "metadata": "./shipgotchi-overclocked.json",
+    "anchor": "C:/Code/challenge-gpt/assets/anchors/shipgotchi-overclocked-anchor-v2.png",
+    "workflow": "v2-anchor-sheet-extract-promote"
+  },
+  "sleep": {
+    "name": "shipgotchi-sleep",
+    "gif": "./shipgotchi-sleep.gif",
+    "sheet": "./shipgotchi-sleep.png",
+    "metadata": "./shipgotchi-sleep.json",
+    "anchor": "C:/Code/challenge-gpt/assets/anchors/shipgotchi-sleep-anchor-v2.png",
+    "workflow": "v2-anchor-sheet-extract-promote"
+  },
+  "sleepy": {
+    "name": "shipgotchi-sleepy",
+    "gif": "./shipgotchi-sleepy.gif",
+    "sheet": "./shipgotchi-sleepy.png",
+    "metadata": "./shipgotchi-sleepy.json"
+  },
+  "tired": {
+    "name": "shipgotchi-tired",
+    "gif": "./shipgotchi-tired.gif",
+    "sheet": "./shipgotchi-tired.png",
+    "metadata": "./shipgotchi-tired.json"
+  },
+  "mystery": {
+    "name": "shipgotchi-mystery",
+    "gif": "./shipgotchi-mystery.gif",
+    "sheet": "./shipgotchi-mystery.png",
+    "metadata": "./shipgotchi-mystery.json",
+    "anchor": "C:/Code/challenge-gpt/assets/anchors/shipgotchi-mystery-anchor-v2.png",
+    "workflow": "v2-anchor-sheet-extract-promote"
+  }
+}

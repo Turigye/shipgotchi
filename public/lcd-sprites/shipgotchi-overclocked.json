@@ -1,0 +1,19 @@
+{
+  "name": "shipgotchi-overclocked",
+  "image": "./shipgotchi-overclocked.png",
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frames": 8,
+  "fps": 8,
+  "loop": true,
+  "selectedFrames": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ]
+}
