@@ -73,12 +73,14 @@ export function BuilderDNACard({ pet }: { pet: PetProfile }) {
               screen instead of floating over a gray gradient. Works in
               both light and dark modes since the green is universal. */}
           <div
-            className="relative mx-5 mt-3 flex justify-center rounded-[1.3rem] py-3"
+            className="relative mx-5 mt-3 flex justify-center rounded-[1.3rem] py-1"
             style={{
-              background:
-                "radial-gradient(circle at 50% 30%, #D6E2A1 0%, #C5D58B 55%, #B5C97A 100%)",
+              // Flat color (user-picked from the actual sprite). A gradient
+              // creates a visible boundary because its corners are darker
+              // than the GIF's flat background; the flat value merges cleanly.
+              background: "#CFD39C",
               boxShadow:
-                "inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -2px 6px rgba(0,0,0,0.08)",
+                "inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 3px rgba(0,0,0,0.06)",
             }}
           >
             <ShipGotchiSprite
