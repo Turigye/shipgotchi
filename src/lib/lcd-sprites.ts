@@ -206,7 +206,10 @@ export function variantToLcdState(variant: SpriteVariant): LcdState {
     case "overclocked":
       return "overclocked";
     case "sleepy":
-      return "sleepy";
+      // Our "sleepy" variant means 30+ days quiet — that's fully asleep
+      // with Z's. The "sleepy" LCD state is the drowsy/yawning pose; use
+      // the "sleep" LCD state instead for the deep-nap look.
+      return "sleep";
     case "mystery":
       return "mystery";
   }
