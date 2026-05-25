@@ -1,5 +1,6 @@
 // Deterministic, explainable scoring. Same input -> same PetProfile, always.
 
+import { calmVibe } from "./commit-vibe";
 import { builderClass, outfitForLanguage, personalityLine } from "./copy";
 import type {
   BuilderStats,
@@ -161,6 +162,7 @@ function ensureStats(a: GitHubActivity): BuilderStats {
     streakDays: days <= 1 ? Math.min(7, recent) : 0,
     dailyCommits7d,
     recentRepos: [],
+    commitVibe: calmVibe(),
   };
 }
 
@@ -236,6 +238,7 @@ export function mysteryPet(username: string): PetProfile {
       streakDays: 0,
       dailyCommits7d: [0, 0, 0, 0, 0, 0, 0],
       recentRepos: [],
+      commitVibe: calmVibe(),
     },
     happiness: 50,
     hunger: 50,

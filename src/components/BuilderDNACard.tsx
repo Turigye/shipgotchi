@@ -68,8 +68,19 @@ export function BuilderDNACard({ pet }: { pet: PetProfile }) {
             </div>
           </div>
 
-          {/* sprite stage */}
-          <div className="relative mx-5 mt-3 flex justify-center rounded-[1.3rem] bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.9),rgba(255,246,236,0.4))] py-3">
+          {/* sprite stage — LCD-green panel matched to the green baked into
+              the raster sprites, so the gotchi sits inside one continuous
+              screen instead of floating over a gray gradient. Works in
+              both light and dark modes since the green is universal. */}
+          <div
+            className="relative mx-5 mt-3 flex justify-center rounded-[1.3rem] py-3"
+            style={{
+              background:
+                "radial-gradient(circle at 50% 30%, #D6E2A1 0%, #C5D58B 55%, #B5C97A 100%)",
+              boxShadow:
+                "inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -2px 6px rgba(0,0,0,0.08)",
+            }}
+          >
             <ShipGotchiSprite
               variant={pet.spriteVariant}
               mood={pet.mood}

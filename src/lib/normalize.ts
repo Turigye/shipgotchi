@@ -1,6 +1,7 @@
 // Pure normalization: raw GitHub REST shapes -> our GitHubProfile / GitHubActivity.
 // No fetching here so the proxy AND tests can share this logic.
 
+import { classifyCommitVibe } from "./commit-vibe";
 import type { BuilderStats, GitHubActivity, GitHubProfile } from "./types";
 
 export interface RawUser {
@@ -13,10 +14,14 @@ export interface RawUser {
   created_at: string;
 }
 
+export interface RawCommit {
+  message?: string;
+}
+
 export interface RawEvent {
   type: string;
   created_at: string;
-  payload?: { commits?: unknown[] };
+  payload?: { commits?: RawCommit[] };
   repo?: { name?: string };
 }
 
@@ -107,6 +112,9 @@ export function normalizeActivity(
   const dailyCommits7d = [0, 0, 0, 0, 0, 0, 0]; // oldest -> newest
   const activeDays = new Set<number>(); // day-of-year buckets
   const recentRepoNames: string[] = [];
+  // Collect commit messages from PushEvent payloads so we can derive a vibe.
+  // Cap to 60 messages — plenty for classification, no point hauling more.
+  const recentMessages: string[] = [];
 
   for (const e of safeEvents) {
     const t = Date.parse(e.created_at);
@@ -121,12 +129,21 @@ export function normalizeActivity(
 
     // Track per-day commit count for last 7 days (oldest -> newest).
     if (e.type === "PushEvent") {
-      const commits = e.payload?.commits?.length ?? 1;
-      if (ageDays <= 1) commits24h += commits;
+      const commits = e.payload?.commits ?? [];
+      const count = commits.length || 1;
+      if (ageDays <= 1) commits24h += count;
       if (ageDays <= 7) {
-        commits7d += commits;
+        commits7d += count;
         const slot = Math.min(6, Math.max(0, 6 - Math.floor(ageDays)));
-        dailyCommits7d[slot] += commits;
+        dailyCommits7d[slot] += count;
+      }
+      // Stash the commit messages (within 30 days) for vibe classification.
+      if (ageDays <= 30) {
+        for (const c of commits) {
+          if (c?.message && recentMessages.length < 60) {
+            recentMessages.push(c.message);
+          }
+        }
       }
     } else if (e.type === "PullRequestEvent") {
       pullRequests += 1;
@@ -177,6 +194,7 @@ export function normalizeActivity(
     streakDays,
     dailyCommits7d,
     recentRepos: recentRepoNames,
+    commitVibe: classifyCommitVibe(recentMessages),
   };
 
   return {

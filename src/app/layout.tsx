@@ -64,8 +64,27 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      // The no-flash theme bootstrap script below mutates <html>'s class
+      // list before React hydrates, which is exactly what
+      // suppressHydrationWarning is for. Scoped to this element only.
+      suppressHydrationWarning
       className={`${vt323.variable} ${fredoka.variable} ${nunito.variable} ${jetbrains.variable} h-full antialiased`}
     >
+      <head>
+        {/*
+          No-flash theme bootstrap. Runs before first paint and sets the
+          `.dark` class on <html> based on saved preference or system pref,
+          so users never see a light flash when reloading in dark mode.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            // Default to dark on first visit. Only honor an explicit 'light'
+            // choice from the user (saved in localStorage); anything else
+            // falls through to dark, including users who have never toggled.
+            __html: `(function(){try{var k='shipgotchi-theme';var t=localStorage.getItem(k);if(t!=='light')document.documentElement.classList.add('dark');}catch(e){document.documentElement.classList.add('dark');}})();`,
+          }}
+        />
+      </head>
       <body className="min-h-full">{children}</body>
     </html>
   );

@@ -11,6 +11,7 @@ import { SessionBoard } from "./SessionBoard";
 import { MoodReference } from "./MoodReference";
 import { HowItWorks } from "./HowItWorks";
 import { ShipGotchiSprite } from "./ShipGotchiSprite";
+import { ThemeToggle } from "./ThemeToggle";
 
 type Phase = "idle" | "hatching" | "revealed";
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -80,9 +81,12 @@ export function ShipGotchiApp() {
           </span>
           <span className="font-display text-xl font-700 text-ink">ShipGotchi</span>
         </button>
-        <span className="rounded-full border border-ink/12 bg-cream/70 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-soft">
-          no login · live data
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="rounded-full border border-ink/12 bg-cream/70 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-soft">
+            no login · live data
+          </span>
+          <ThemeToggle />
+        </div>
       </header>
 
       <main className="flex flex-1 flex-col items-center px-5">

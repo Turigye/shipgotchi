@@ -65,7 +65,28 @@ export interface BuilderStats {
   streakDays: number; // consecutive recent days with public activity
   dailyCommits7d: number[]; // length 7, oldest -> newest, for sparkline
   recentRepos: string[]; // up to 6 distinct repo names recently touched
+  commitVibe: CommitVibe; // sentiment derived from recent commit messages
 }
+
+// A single-word vibe + emoji + a friendly one-liner, derived deterministically
+// from the user's recent commit messages. Surfaced as a chip in BuilderVitals.
+export interface CommitVibe {
+  key: CommitVibeKey;
+  emoji: string;
+  label: string; // 1-3 words, sentence case
+  line: string; // short subtitle for the chip
+  sampleCount: number; // how many commit messages contributed
+}
+
+export type CommitVibeKey =
+  | "launch"
+  | "firefighting"
+  | "polish"
+  | "experimenting"
+  | "learning"
+  | "building"
+  | "grinding"
+  | "calm";
 
 export interface PetProfile {
   username: string;

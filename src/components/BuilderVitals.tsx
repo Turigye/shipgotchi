@@ -68,6 +68,35 @@ export function BuilderVitals({ pet }: { pet: PetProfile }) {
         </span>
       </div>
 
+      {/* Commit-message vibe chip — what their recent commits feel like. */}
+      <div
+        className="mb-4 flex items-start gap-3 rounded-2xl px-3 py-2.5"
+        style={{
+          background:
+            "linear-gradient(100deg,color-mix(in srgb,var(--color-grape) 14%,transparent),color-mix(in srgb,var(--color-mint) 12%,transparent))",
+          border: "1px solid color-mix(in srgb,var(--color-ink) 8%,transparent)",
+        }}
+      >
+        <span className="text-2xl leading-none" aria-hidden>
+          {s.commitVibe.emoji}
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-soft">
+            Today&rsquo;s vibe · from commit messages
+          </p>
+          <p className="font-display text-base font-700 text-ink">{s.commitVibe.label}</p>
+          <p className="font-body text-xs text-ink-soft">
+            {s.commitVibe.line}
+            {s.commitVibe.sampleCount > 0 && (
+              <span className="text-ink-soft/70">
+                {" "}
+                · {s.commitVibe.sampleCount} message{s.commitVibe.sampleCount === 1 ? "" : "s"} read
+              </span>
+            )}
+          </p>
+        </div>
+      </div>
+
       {/* Four-bar Tamagotchi vital block */}
       <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
         <Bar

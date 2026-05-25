@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Class-based dark mode — toggled by adding `.dark` to <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ===========================================================================
    ShipGotchi — "premium collectible vinyl toy meets soft builder-lab"
    Warm cream canvas, candy accents, rounded display type, mono data accents.
@@ -182,6 +185,50 @@ body::after {
   opacity: 0.05;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------------------------------------------------------------------------
+   Dark mode — opt-in by toggling `.dark` on <html>.
+   We swap the surface tokens (canvas / cream / ink / ink-soft) so every
+   `bg-cream`, `text-ink`, `text-ink-soft`, `card-toy`, etc. utility flips
+   automatically. Candy accents (coral, mint, grape...) stay the same — they
+   pop nicely against the deep-night canvas without re-tuning.
+   --------------------------------------------------------------------------- */
+.dark {
+  --color-canvas: #0c0f17;
+  --color-cream: #181c28;
+  --color-ink: #f5f1ff;
+  --color-ink-soft: #aea7c4;
+}
+
+/* Dark-mode body atmosphere: muted candy washes instead of the bright mesh. */
+.dark body {
+  background-image:
+    radial-gradient(58vw 48vw at 12% 8%, color-mix(in srgb, var(--color-grape) 28%, transparent), transparent 60%),
+    radial-gradient(52vw 46vw at 92% 6%, color-mix(in srgb, var(--color-mint) 18%, transparent), transparent 58%),
+    radial-gradient(60vw 60vw at 82% 96%, color-mix(in srgb, var(--color-bubble) 18%, transparent), transparent 60%),
+    radial-gradient(46vw 46vw at 4% 92%, color-mix(in srgb, var(--color-sky) 16%, transparent), transparent 60%);
+}
+
+/* Soften the printed-toy noise overlay so dark surfaces don't get crunchy. */
+.dark body::after {
+  opacity: 0.08;
+  mix-blend-mode: screen;
+}
+
+/* In dark mode the card shadow should glow instead of cast — and the inset
+   highlight needs to be a hairline of light, not the cream sheen. */
+.dark .card-toy {
+  border-color: color-mix(in srgb, var(--color-ink) 16%, transparent);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 18px 40px -18px rgba(0, 0, 0, 0.55);
+}
+
+/* The LCD sprite panels look great on cream; on dark they read as floating
+   green TVs. Lift them a touch with a subtle outer glow. */
+.dark img[src*="/lcd-sprites/"] {
+  filter: drop-shadow(0 0 14px rgba(31, 207, 176, 0.18));
 }
 
 h1, h2, h3, .font-display {
